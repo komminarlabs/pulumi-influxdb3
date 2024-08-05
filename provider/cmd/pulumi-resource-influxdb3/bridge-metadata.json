@@ -1,0 +1,54 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "influxdb3_database": {
+                "current": "influxdb3:index/database:Database"
+            },
+            "influxdb3_token": {
+                "current": "influxdb3:index/token:Token",
+                "fields": {
+                    "permissions": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        },
+        "datasources": {
+            "influxdb3_database": {
+                "current": "influxdb3:index/getDatabase:getDatabase"
+            },
+            "influxdb3_databases": {
+                "current": "influxdb3:index/getDatabases:getDatabases",
+                "fields": {
+                    "databases": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "influxdb3_token": {
+                "current": "influxdb3:index/getToken:getToken",
+                "fields": {
+                    "permissions": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "influxdb3_tokens": {
+                "current": "influxdb3:index/getTokens:getTokens",
+                "fields": {
+                    "tokens": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "permissions": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {}
+}
