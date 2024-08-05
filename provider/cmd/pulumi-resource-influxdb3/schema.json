@@ -1,1 +1,633 @@
-{}
+{
+    "name": "influxdb3",
+    "displayName": "InfluxDB3",
+    "description": "A Pulumi package for creating and managing InfluxDB V3 resources.",
+    "keywords": [
+        "pulumi",
+        "influxdb3",
+        "category/database"
+    ],
+    "homepage": "https://www.influxdata.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`influxdb3` Terraform Provider](https://github.com/komminarlabs/terraform-provider-influxdb3).",
+    "repository": "https://github.com/komminarlabs/pulumi-influxdb3",
+    "logoUrl": "https://avatars.githubusercontent.com/u/5713248?s=200\u0026v=4",
+    "pluginDownloadURL": "github://api.github.com/komminarlabs",
+    "publisher": "komminarlabs",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "packageReferences": {
+                "Pulumi": "3.*"
+            },
+            "namespaces": {
+                "influxdb3": "InfluxDB3"
+            },
+            "compatibility": "tfbridge20",
+            "rootNamespace": "KomminarLabs"
+        },
+        "go": {
+            "importBasePath": "github.com/komminarlabs/pulumi-influxdb3/sdk/go/influxdb3",
+            "generateResourceContainerTypes": true,
+            "generateExtraInputTypes": true
+        },
+        "nodejs": {
+            "packageName": "@komminarlabs/influxdb3",
+            "packageDescription": "A Pulumi package for creating and managing InfluxDB V3 resources.",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/komminarlabs/terraform-provider-influxdb3)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-influxdb3` repo](https://github.com/komminarlabs/pulumi-influxdb3/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-influxdb3` repo](https://github.com/komminarlabs/terraform-provider-influxdb3/issues).",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true
+        },
+        "python": {
+            "packageName": "komminarlabs_influxdb3",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            },
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/komminarlabs/terraform-provider-influxdb3)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-influxdb3` repo](https://github.com/komminarlabs/pulumi-influxdb3/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-influxdb3` repo](https://github.com/komminarlabs/terraform-provider-influxdb3/issues).",
+            "compatibility": "tfbridge20",
+            "pyproject": {}
+        }
+    },
+    "config": {
+        "variables": {
+            "accountId": {
+                "type": "string",
+                "description": "The ID of the account that the cluster belongs to\n",
+                "secret": true
+            },
+            "clusterId": {
+                "type": "string",
+                "description": "The ID of the cluster that you want to manage\n",
+                "secret": true
+            },
+            "token": {
+                "type": "string",
+                "description": "The InfluxDB management token\n",
+                "secret": true
+            },
+            "url": {
+                "type": "string",
+                "description": "The InfluxDB Cloud Dedicated Management API URL\n"
+            }
+        }
+    },
+    "types": {
+        "influxdb3:index/TokenPermission:TokenPermission": {
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "The action the database token permission allows. Valid values are `read` or `write`.\n"
+                },
+                "resource": {
+                    "type": "string",
+                    "description": "The resource the database token permission applies to. `*` refers to all databases.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "action",
+                "resource"
+            ]
+        },
+        "influxdb3:index/getDatabasesDatabase:getDatabasesDatabase": {
+            "properties": {
+                "accountId": {
+                    "type": "string",
+                    "description": "The ID of the account that the cluster belongs to.\n"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "The ID of the cluster that you want to manage.\n"
+                },
+                "maxColumnsPerTable": {
+                    "type": "integer",
+                    "description": "The maximum number of columns per table for the cluster database.\n"
+                },
+                "maxTables": {
+                    "type": "integer",
+                    "description": "The maximum number of tables for the cluster database.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the cluster database.\n"
+                },
+                "retentionPeriod": {
+                    "type": "integer",
+                    "description": "The retention period of the cluster database in nanoseconds.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "accountId",
+                "clusterId",
+                "maxColumnsPerTable",
+                "maxTables",
+                "name",
+                "retentionPeriod"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "influxdb3:index/getTokenPermission:getTokenPermission": {
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "The action the database token permission allows.\n"
+                },
+                "resource": {
+                    "type": "string",
+                    "description": "The resource the database token permission applies to. `*` refers to all databases.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "action",
+                "resource"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "influxdb3:index/getTokensToken:getTokensToken": {
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "description": "The access token that can be used to authenticate query and write requests to the cluster. The access token is never stored by InfluxDB and is only returned once when the token is created. If the access token is lost, a new token must be created.\n",
+                    "secret": true
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "The ID of the account that the database token belongs to.\n"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "The ID of the cluster that the database token belongs to.\n"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The date and time that the database token was created. Uses RFC3339 format.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the database token.\n"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The ID of the database token.\n"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/influxdb3:index/getTokensTokenPermission:getTokensTokenPermission"
+                    },
+                    "description": "The list of permissions the database token allows.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "accessToken",
+                "accountId",
+                "clusterId",
+                "createdAt",
+                "description",
+                "id",
+                "permissions"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "influxdb3:index/getTokensTokenPermission:getTokensTokenPermission": {
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "The action the database token permission allows.\n"
+                },
+                "resource": {
+                    "type": "string",
+                    "description": "The resource the database token permission applies to. `*` refers to all databases.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "action",
+                "resource"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        }
+    },
+    "provider": {
+        "description": "The provider type for the influxdb3 package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "accountId": {
+                "type": "string",
+                "description": "The ID of the account that the cluster belongs to\n",
+                "secret": true
+            },
+            "clusterId": {
+                "type": "string",
+                "description": "The ID of the cluster that you want to manage\n",
+                "secret": true
+            },
+            "token": {
+                "type": "string",
+                "description": "The InfluxDB management token\n",
+                "secret": true
+            },
+            "url": {
+                "type": "string",
+                "description": "The InfluxDB Cloud Dedicated Management API URL\n"
+            }
+        },
+        "inputProperties": {
+            "accountId": {
+                "type": "string",
+                "description": "The ID of the account that the cluster belongs to\n",
+                "secret": true
+            },
+            "clusterId": {
+                "type": "string",
+                "description": "The ID of the cluster that you want to manage\n",
+                "secret": true
+            },
+            "token": {
+                "type": "string",
+                "description": "The InfluxDB management token\n",
+                "secret": true
+            },
+            "url": {
+                "type": "string",
+                "description": "The InfluxDB Cloud Dedicated Management API URL\n"
+            }
+        }
+    },
+    "resources": {
+        "influxdb3:index/database:Database": {
+            "description": "Creates and manages a database.\n",
+            "properties": {
+                "accountId": {
+                    "type": "string",
+                    "description": "The ID of the account that the cluster belongs to.\n"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "The ID of the cluster that you want to manage.\n"
+                },
+                "maxColumnsPerTable": {
+                    "type": "integer",
+                    "description": "The maximum number of columns per table for the cluster database. The default is `200`\n"
+                },
+                "maxTables": {
+                    "type": "integer",
+                    "description": "The maximum number of tables for the cluster database. The default is `500`\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                },
+                "retentionPeriod": {
+                    "type": "integer",
+                    "description": "The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.\n"
+                }
+            },
+            "required": [
+                "accountId",
+                "clusterId",
+                "maxColumnsPerTable",
+                "maxTables",
+                "name",
+                "retentionPeriod"
+            ],
+            "inputProperties": {
+                "maxColumnsPerTable": {
+                    "type": "integer",
+                    "description": "The maximum number of columns per table for the cluster database. The default is `200`\n"
+                },
+                "maxTables": {
+                    "type": "integer",
+                    "description": "The maximum number of tables for the cluster database. The default is `500`\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                },
+                "retentionPeriod": {
+                    "type": "integer",
+                    "description": "The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.\n"
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Database resources.\n",
+                "properties": {
+                    "accountId": {
+                        "type": "string",
+                        "description": "The ID of the account that the cluster belongs to.\n"
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the cluster that you want to manage.\n"
+                    },
+                    "maxColumnsPerTable": {
+                        "type": "integer",
+                        "description": "The maximum number of columns per table for the cluster database. The default is `200`\n"
+                    },
+                    "maxTables": {
+                        "type": "integer",
+                        "description": "The maximum number of tables for the cluster database. The default is `500`\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                    },
+                    "retentionPeriod": {
+                        "type": "integer",
+                        "description": "The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "influxdb3:index/token:Token": {
+            "description": "Creates and manages a token and returns the generated database token. Use this resource to create/manage a token, which generates an database token with permissions to read or write to a specific database.\n",
+            "properties": {
+                "accessToken": {
+                    "type": "string",
+                    "description": "The access token that can be used to authenticate query and write requests to the cluster. The access token is never stored by InfluxDB and is only returned once when the token is created. If the access token is lost, a new token must be created.\n",
+                    "secret": true
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "The ID of the account that the database token belongs to.\n"
+                },
+                "clusterId": {
+                    "type": "string",
+                    "description": "The ID of the cluster that the database token belongs to.\n"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "The date and time that the database token was created. Uses RFC3339 format.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The description of the database token.\n"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/influxdb3:index/TokenPermission:TokenPermission"
+                    },
+                    "description": "The list of permissions the database token allows.\n"
+                }
+            },
+            "required": [
+                "accessToken",
+                "accountId",
+                "clusterId",
+                "createdAt",
+                "description",
+                "permissions"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The description of the database token.\n"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/influxdb3:index/TokenPermission:TokenPermission"
+                    },
+                    "description": "The list of permissions the database token allows.\n"
+                }
+            },
+            "requiredInputs": [
+                "description",
+                "permissions"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Token resources.\n",
+                "properties": {
+                    "accessToken": {
+                        "type": "string",
+                        "description": "The access token that can be used to authenticate query and write requests to the cluster. The access token is never stored by InfluxDB and is only returned once when the token is created. If the access token is lost, a new token must be created.\n",
+                        "secret": true
+                    },
+                    "accountId": {
+                        "type": "string",
+                        "description": "The ID of the account that the database token belongs to.\n"
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the cluster that the database token belongs to.\n"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "The date and time that the database token was created. Uses RFC3339 format.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the database token.\n"
+                    },
+                    "permissions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/influxdb3:index/TokenPermission:TokenPermission"
+                        },
+                        "description": "The list of permissions the database token allows.\n"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "functions": {
+        "influxdb3:index/getDatabase:getDatabase": {
+            "description": "Retrieves a database. Use this data source to retrieve information for a specific database.\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getDatabase.\n",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the cluster database.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "name"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDatabase.\n",
+                "properties": {
+                    "accountId": {
+                        "type": "string",
+                        "description": "The ID of the account that the cluster belongs to.\n"
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the cluster that you want to manage.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "maxColumnsPerTable": {
+                        "type": "integer",
+                        "description": "The maximum number of columns per table for the cluster database.\n"
+                    },
+                    "maxTables": {
+                        "type": "integer",
+                        "description": "The maximum number of tables for the cluster database.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the cluster database.\n"
+                    },
+                    "retentionPeriod": {
+                        "type": "integer",
+                        "description": "The retention period of the cluster database in nanoseconds.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "accountId",
+                    "clusterId",
+                    "maxColumnsPerTable",
+                    "maxTables",
+                    "name",
+                    "retentionPeriod",
+                    "id"
+                ]
+            }
+        },
+        "influxdb3:index/getDatabases:getDatabases": {
+            "description": "Gets all databases for a cluster.\n",
+            "outputs": {
+                "description": "A collection of values returned by getDatabases.\n",
+                "properties": {
+                    "databases": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/influxdb3:index/getDatabasesDatabase:getDatabasesDatabase"
+                        }
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "databases",
+                    "id"
+                ]
+            }
+        },
+        "influxdb3:index/getToken:getToken": {
+            "description": "Gets a database token. Use this data source to retrieve information about a database token, including the token's permissions.\n",
+            "inputs": {
+                "description": "A collection of arguments for invoking getToken.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the database token.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getToken.\n",
+                "properties": {
+                    "accessToken": {
+                        "type": "string",
+                        "description": "The access token that can be used to authenticate query and write requests to the cluster. The access token is never stored by InfluxDB and is only returned once when the token is created. If the access token is lost, a new token must be created.\n",
+                        "secret": true
+                    },
+                    "accountId": {
+                        "type": "string",
+                        "description": "The ID of the account that the database token belongs to.\n"
+                    },
+                    "clusterId": {
+                        "type": "string",
+                        "description": "The ID of the cluster that the database token belongs to.\n"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "The date and time that the database token was created. Uses RFC3339 format.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description of the database token.\n"
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The ID of the database token.\n"
+                    },
+                    "permissions": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/influxdb3:index/getTokenPermission:getTokenPermission"
+                        },
+                        "description": "The list of permissions the database token allows.\n"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "accessToken",
+                    "accountId",
+                    "clusterId",
+                    "createdAt",
+                    "description",
+                    "id",
+                    "permissions"
+                ]
+            }
+        },
+        "influxdb3:index/getTokens:getTokens": {
+            "description": "Gets all database tokens for a cluster.\n",
+            "outputs": {
+                "description": "A collection of values returned by getTokens.\n",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The provider-assigned unique ID for this managed resource.\n"
+                    },
+                    "tokens": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/influxdb3:index/getTokensToken:getTokensToken"
+                        }
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "tokens",
+                    "id"
+                ]
+            }
+        }
+    }
+}
