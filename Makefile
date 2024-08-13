@@ -4,7 +4,7 @@ PROJECT          := github.com/komminarlabs/pulumi-influxdb3
 NODE_MODULE_NAME := @komminarlabs/influxdb3
 TF_NAME          := influxdb3
 PROVIDER_PATH    := provider
-PROVIDER_VERSION := 1.2.0
+PROVIDER_VERSION := 1.0.1
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
 TFGEN            := pulumi-tfgen-influxdb3

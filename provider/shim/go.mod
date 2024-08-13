@@ -3,8 +3,8 @@ module github.com/komminarlabs/terraform-provider-influxdb3/shim
 go 1.22.2
 
 require (
-	github.com/hashicorp/terraform-plugin-framework v1.10.0
-	github.com/komminarlabs/terraform-provider-influxdb3 v1.0.0
+	github.com/hashicorp/terraform-plugin-framework v1.11.0
+	github.com/komminarlabs/terraform-provider-influxdb3 v1.0.1
 )
 
 require (
@@ -22,5 +22,5 @@ require (
 	github.com/oapi-codegen/runtime v1.1.1 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
-	golang.org/x/sys v0.22.0 // indirect
+	golang.org/x/sys v0.23.0 // indirect
 )

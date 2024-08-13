@@ -41,7 +41,7 @@ namespace KomminarLabs.InfluxDB3
         public Output<int> MaxTables { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
@@ -112,7 +112,7 @@ namespace KomminarLabs.InfluxDB3
         public Input<int>? MaxTables { get; set; }
 
         /// <summary>
-        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
@@ -156,7 +156,7 @@ namespace KomminarLabs.InfluxDB3
         public Input<int>? MaxTables { get; set; }
 
         /// <summary>
-        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }

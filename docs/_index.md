@@ -10,7 +10,7 @@ The InfluxDB V3 provider must be configured with credentials to deploy and updat
 
 ## Example
 
-{{< chooser language "typescript,python,go,csharp" >}}
+{{< chooser language "typescript,python,go" >}}
 {{% choosable language typescript %}}
 
 ```typescript

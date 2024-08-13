@@ -52,7 +52,7 @@ export class Database extends pulumi.CustomResource {
      */
     public readonly maxTables!: pulumi.Output<number>;
     /**
-     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -114,7 +114,7 @@ export interface DatabaseState {
      */
     maxTables?: pulumi.Input<number>;
     /**
-     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
      */
     name?: pulumi.Input<string>;
     /**
@@ -136,7 +136,7 @@ export interface DatabaseArgs {
      */
     maxTables?: pulumi.Input<number>;
     /**
-     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
      */
     name?: pulumi.Input<string>;
     /**

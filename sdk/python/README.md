@@ -1,6 +1,6 @@
 # InfluxDB V3 Resource Provider
 
-The InfluxDB V3 Resource Provider lets you manage [InfluxDB V3](https://www.influxdata.com/) resources.
+The InfluxDB V3 Resource Provider lets you manage [InfluxDB V3](https://www.influxdata.com/products/influxdb-overview/#overview) resources.
 
 ## Installing
 
@@ -25,7 +25,7 @@ yarn add @komminarlabs/influxdb3
 To use from Python, install using `pip`:
 
 ```bash
-pip install komminarlabs_influxdb3
+pip install komminarlabs-influxdb3
 ```
 
 ### Go

@@ -23,7 +23,7 @@ type Database struct {
 	MaxColumnsPerTable pulumi.IntOutput `pulumi:"maxColumnsPerTable"`
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables pulumi.IntOutput `pulumi:"maxTables"`
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
 	RetentionPeriod pulumi.IntOutput `pulumi:"retentionPeriod"`
@@ -67,7 +67,7 @@ type databaseState struct {
 	MaxColumnsPerTable *int `pulumi:"maxColumnsPerTable"`
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables *int `pulumi:"maxTables"`
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name *string `pulumi:"name"`
 	// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
 	RetentionPeriod *int `pulumi:"retentionPeriod"`
@@ -82,7 +82,7 @@ type DatabaseState struct {
 	MaxColumnsPerTable pulumi.IntPtrInput
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables pulumi.IntPtrInput
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name pulumi.StringPtrInput
 	// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
 	RetentionPeriod pulumi.IntPtrInput
@@ -97,7 +97,7 @@ type databaseArgs struct {
 	MaxColumnsPerTable *int `pulumi:"maxColumnsPerTable"`
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables *int `pulumi:"maxTables"`
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name *string `pulumi:"name"`
 	// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
 	RetentionPeriod *int `pulumi:"retentionPeriod"`
@@ -109,7 +109,7 @@ type DatabaseArgs struct {
 	MaxColumnsPerTable pulumi.IntPtrInput
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables pulumi.IntPtrInput
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name pulumi.StringPtrInput
 	// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
 	RetentionPeriod pulumi.IntPtrInput
@@ -222,7 +222,7 @@ func (o DatabaseOutput) MaxTables() pulumi.IntOutput {
 	return o.ApplyT(func(v *Database) pulumi.IntOutput { return v.MaxTables }).(pulumi.IntOutput)
 }
 
-// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 func (o DatabaseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Database) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
