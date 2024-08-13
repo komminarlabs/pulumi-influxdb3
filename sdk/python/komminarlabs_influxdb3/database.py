@@ -22,7 +22,7 @@ class DatabaseArgs:
         The set of arguments for constructing a Database resource.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         if max_columns_per_table is not None:
@@ -62,7 +62,7 @@ class DatabaseArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         """
         return pulumi.get(self, "name")
 
@@ -98,7 +98,7 @@ class _DatabaseState:
         :param pulumi.Input[str] cluster_id: The ID of the cluster that you want to manage.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         if account_id is not None:
@@ -166,7 +166,7 @@ class _DatabaseState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         """
         return pulumi.get(self, "name")
 
@@ -204,7 +204,7 @@ class Database(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         ...
@@ -277,7 +277,7 @@ class Database(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_id: The ID of the cluster that you want to manage.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -328,7 +328,7 @@ class Database(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         """
         return pulumi.get(self, "name")
 
