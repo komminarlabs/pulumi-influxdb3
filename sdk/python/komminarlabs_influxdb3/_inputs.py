@@ -10,8 +10,46 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
 
 __all__ = [
+    'DatabasePartitionTemplateArgs',
     'TokenPermissionArgs',
 ]
+
+@pulumi.input_type
+class DatabasePartitionTemplateArgs:
+    def __init__(__self__, *,
+                 type: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] type: The type of template part. Valid values are `bucket`, `tag` or `time`.
+        :param pulumi.Input[str] value: The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+        """
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> pulumi.Input[str]:
+        """
+        The type of template part. Valid values are `bucket`, `tag` or `time`.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "type", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
 
 @pulumi.input_type
 class TokenPermissionArgs:

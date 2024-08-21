@@ -12,6 +12,52 @@ namespace KomminarLabs.InfluxDB3
 {
     /// <summary>
     /// Creates and manages a database.
+    /// 
+    /// ## Example Usage
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using InfluxDB3 = KomminarLabs.InfluxDB3;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var signals = new InfluxDB3.Database("signals", new()
+    ///     {
+    ///         RetentionPeriod = 604800,
+    ///         PartitionTemplates = new[]
+    ///         {
+    ///             new InfluxDB3.Inputs.DatabasePartitionTemplateArgs
+    ///             {
+    ///                 Type = "tag",
+    ///                 Value = "line",
+    ///             },
+    ///             new InfluxDB3.Inputs.DatabasePartitionTemplateArgs
+    ///             {
+    ///                 Type = "tag",
+    ///                 Value = "station",
+    ///             },
+    ///             new InfluxDB3.Inputs.DatabasePartitionTemplateArgs
+    ///             {
+    ///                 Type = "time",
+    ///                 Value = "%Y-%m-%d",
+    ///             },
+    ///             new InfluxDB3.Inputs.DatabasePartitionTemplateArgs
+    ///             {
+    ///                 Type = "bucket",
+    ///                 Value = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["tagName"] = "temperature",
+    ///                     ["numberOfBuckets"] = 10,
+    ///                 }),
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
     /// </summary>
     [InfluxDB3ResourceType("influxdb3:index/database:Database")]
     public partial class Database : global::Pulumi.CustomResource
@@ -41,10 +87,16 @@ namespace KomminarLabs.InfluxDB3
         public Output<int> MaxTables { get; private set; } = null!;
 
         /// <summary>
-        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
+        /// </summary>
+        [Output("partitionTemplates")]
+        public Output<ImmutableArray<Outputs.DatabasePartitionTemplate>> PartitionTemplates { get; private set; } = null!;
 
         /// <summary>
         /// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
@@ -112,10 +164,22 @@ namespace KomminarLabs.InfluxDB3
         public Input<int>? MaxTables { get; set; }
 
         /// <summary>
-        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("partitionTemplates")]
+        private InputList<Inputs.DatabasePartitionTemplateArgs>? _partitionTemplates;
+
+        /// <summary>
+        /// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
+        /// </summary>
+        public InputList<Inputs.DatabasePartitionTemplateArgs> PartitionTemplates
+        {
+            get => _partitionTemplates ?? (_partitionTemplates = new InputList<Inputs.DatabasePartitionTemplateArgs>());
+            set => _partitionTemplates = value;
+        }
 
         /// <summary>
         /// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
@@ -156,10 +220,22 @@ namespace KomminarLabs.InfluxDB3
         public Input<int>? MaxTables { get; set; }
 
         /// <summary>
-        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        /// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("partitionTemplates")]
+        private InputList<Inputs.DatabasePartitionTemplateGetArgs>? _partitionTemplates;
+
+        /// <summary>
+        /// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
+        /// </summary>
+        public InputList<Inputs.DatabasePartitionTemplateGetArgs> PartitionTemplates
+        {
+            get => _partitionTemplates ?? (_partitionTemplates = new InputList<Inputs.DatabasePartitionTemplateGetArgs>());
+            set => _partitionTemplates = value;
+        }
 
         /// <summary>
         /// The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.

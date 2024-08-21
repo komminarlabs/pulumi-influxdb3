@@ -5,6 +5,17 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface DatabasePartitionTemplate {
+    /**
+     * The type of template part. Valid values are `bucket`, `tag` or `time`.
+     */
+    type: pulumi.Input<string>;
+    /**
+     * The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+     */
+    value: pulumi.Input<string>;
+}
+
 export interface TokenPermission {
     /**
      * The action the database token permission allows. Valid values are `read` or `write`.

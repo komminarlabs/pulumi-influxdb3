@@ -81,6 +81,23 @@
         }
     },
     "types": {
+        "influxdb3:index/DatabasePartitionTemplate:DatabasePartitionTemplate": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "The type of template part. Valid values are `bucket`, `tag` or `time`.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "type",
+                "value"
+            ]
+        },
         "influxdb3:index/TokenPermission:TokenPermission": {
             "properties": {
                 "action": {
@@ -97,6 +114,28 @@
                 "action",
                 "resource"
             ]
+        },
+        "influxdb3:index/getDatabasePartitionTemplate:getDatabasePartitionTemplate": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "The type of template part.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of template part.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "type",
+                "value"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
         },
         "influxdb3:index/getDatabasesDatabase:getDatabasesDatabase": {
             "properties": {
@@ -120,6 +159,13 @@
                     "type": "string",
                     "description": "The name of the cluster database.\n"
                 },
+                "partitionTemplates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/influxdb3:index/getDatabasesDatabasePartitionTemplate:getDatabasesDatabasePartitionTemplate"
+                    },
+                    "description": "The template partitioning of the cluster database.\n"
+                },
                 "retentionPeriod": {
                     "type": "integer",
                     "description": "The retention period of the cluster database in nanoseconds.\n"
@@ -132,7 +178,30 @@
                 "maxColumnsPerTable",
                 "maxTables",
                 "name",
+                "partitionTemplates",
                 "retentionPeriod"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
+        },
+        "influxdb3:index/getDatabasesDatabasePartitionTemplate:getDatabasesDatabasePartitionTemplate": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "The type of template part.\n"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "The value of template part.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "type",
+                "value"
             ],
             "language": {
                 "nodejs": {
@@ -283,7 +352,7 @@
     },
     "resources": {
         "influxdb3:index/database:Database": {
-            "description": "Creates and manages a database.\n",
+            "description": "Creates and manages a database.\n\n{{% examples %}}\n## Example Usage\n{{% example %}}\n\n```typescript\nimport * as pulumi from \"@pulumi/pulumi\";\nimport * as influxdb3 from \"@komminarlabs/influxdb3\";\n\nconst signals = new influxdb3.Database(\"signals\", {\n    retentionPeriod: 604800,\n    partitionTemplates: [\n        {\n            type: \"tag\",\n            value: \"line\",\n        },\n        {\n            type: \"tag\",\n            value: \"station\",\n        },\n        {\n            type: \"time\",\n            value: \"%Y-%m-%d\",\n        },\n        {\n            type: \"bucket\",\n            value: JSON.stringify({\n                tagName: \"temperature\",\n                numberOfBuckets: 10,\n            }),\n        },\n    ],\n});\n```\n```python\nimport pulumi\nimport json\nimport komminarlabs_influxdb3 as influxdb3\n\nsignals = influxdb3.Database(\"signals\",\n    retention_period=604800,\n    partition_templates=[\n        influxdb3.DatabasePartitionTemplateArgs(\n            type=\"tag\",\n            value=\"line\",\n        ),\n        influxdb3.DatabasePartitionTemplateArgs(\n            type=\"tag\",\n            value=\"station\",\n        ),\n        influxdb3.DatabasePartitionTemplateArgs(\n            type=\"time\",\n            value=\"%Y-%m-%d\",\n        ),\n        influxdb3.DatabasePartitionTemplateArgs(\n            type=\"bucket\",\n            value=json.dumps({\n                \"tagName\": \"temperature\",\n                \"numberOfBuckets\": 10,\n            }),\n        ),\n    ])\n```\n```csharp\nusing System.Collections.Generic;\nusing System.Linq;\nusing System.Text.Json;\nusing Pulumi;\nusing InfluxDB3 = KomminarLabs.InfluxDB3;\n\nreturn await Deployment.RunAsync(() =\u003e \n{\n    var signals = new InfluxDB3.Database(\"signals\", new()\n    {\n        RetentionPeriod = 604800,\n        PartitionTemplates = new[]\n        {\n            new InfluxDB3.Inputs.DatabasePartitionTemplateArgs\n            {\n                Type = \"tag\",\n                Value = \"line\",\n            },\n            new InfluxDB3.Inputs.DatabasePartitionTemplateArgs\n            {\n                Type = \"tag\",\n                Value = \"station\",\n            },\n            new InfluxDB3.Inputs.DatabasePartitionTemplateArgs\n            {\n                Type = \"time\",\n                Value = \"%Y-%m-%d\",\n            },\n            new InfluxDB3.Inputs.DatabasePartitionTemplateArgs\n            {\n                Type = \"bucket\",\n                Value = JsonSerializer.Serialize(new Dictionary\u003cstring, object?\u003e\n                {\n                    [\"tagName\"] = \"temperature\",\n                    [\"numberOfBuckets\"] = 10,\n                }),\n            },\n        },\n    });\n\n});\n```\n```go\npackage main\n\nimport (\n\t\"encoding/json\"\n\n\t\"github.com/komminarlabs/pulumi-influxdb3/sdk/go/influxdb3\"\n\t\"github.com/pulumi/pulumi/sdk/v3/go/pulumi\"\n)\n\nfunc main() {\n\tpulumi.Run(func(ctx *pulumi.Context) error {\n\t\ttmpJSON0, err := json.Marshal(map[string]interface{}{\n\t\t\t\"tagName\":         \"temperature\",\n\t\t\t\"numberOfBuckets\": 10,\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\tjson0 := string(tmpJSON0)\n\t\t_, err = influxdb3.NewDatabase(ctx, \"signals\", \u0026influxdb3.DatabaseArgs{\n\t\t\tRetentionPeriod: pulumi.Int(604800),\n\t\t\tPartitionTemplates: influxdb3.DatabasePartitionTemplateArray{\n\t\t\t\t\u0026influxdb3.DatabasePartitionTemplateArgs{\n\t\t\t\t\tType:  pulumi.String(\"tag\"),\n\t\t\t\t\tValue: pulumi.String(\"line\"),\n\t\t\t\t},\n\t\t\t\t\u0026influxdb3.DatabasePartitionTemplateArgs{\n\t\t\t\t\tType:  pulumi.String(\"tag\"),\n\t\t\t\t\tValue: pulumi.String(\"station\"),\n\t\t\t\t},\n\t\t\t\t\u0026influxdb3.DatabasePartitionTemplateArgs{\n\t\t\t\t\tType:  pulumi.String(\"time\"),\n\t\t\t\t\tValue: pulumi.String(\"%Y-%m-%d\"),\n\t\t\t\t},\n\t\t\t\t\u0026influxdb3.DatabasePartitionTemplateArgs{\n\t\t\t\t\tType:  pulumi.String(\"bucket\"),\n\t\t\t\t\tValue: pulumi.String(json0),\n\t\t\t\t},\n\t\t\t},\n\t\t})\n\t\tif err != nil {\n\t\t\treturn err\n\t\t}\n\t\treturn nil\n\t})\n}\n```\n```java\npackage generated_program;\n\nimport com.pulumi.Context;\nimport com.pulumi.Pulumi;\nimport com.pulumi.core.Output;\nimport com.pulumi.influxdb3.Database;\nimport com.pulumi.influxdb3.DatabaseArgs;\nimport com.pulumi.influxdb3.inputs.DatabasePartitionTemplateArgs;\nimport static com.pulumi.codegen.internal.Serialization.*;\nimport java.util.List;\nimport java.util.ArrayList;\nimport java.util.Map;\nimport java.io.File;\nimport java.nio.file.Files;\nimport java.nio.file.Paths;\n\npublic class App {\n    public static void main(String[] args) {\n        Pulumi.run(App::stack);\n    }\n\n    public static void stack(Context ctx) {\n        var signals = new Database(\"signals\", DatabaseArgs.builder()        \n            .retentionPeriod(604800)\n            .partitionTemplates(            \n                DatabasePartitionTemplateArgs.builder()\n                    .type(\"tag\")\n                    .value(\"line\")\n                    .build(),\n                DatabasePartitionTemplateArgs.builder()\n                    .type(\"tag\")\n                    .value(\"station\")\n                    .build(),\n                DatabasePartitionTemplateArgs.builder()\n                    .type(\"time\")\n                    .value(\"%Y-%m-%d\")\n                    .build(),\n                DatabasePartitionTemplateArgs.builder()\n                    .type(\"bucket\")\n                    .value(serializeJson(\n                        jsonObject(\n                            jsonProperty(\"tagName\", \"temperature\"),\n                            jsonProperty(\"numberOfBuckets\", 10)\n                        )))\n                    .build())\n            .build());\n\n    }\n}\n```\n```yaml\nresources:\n  signals:\n    type: influxdb3:Database\n    properties:\n      retentionPeriod: 604800\n      partitionTemplates:\n        - type: tag\n          value: line\n        - type: tag\n          value: station\n        - type: time\n          value: '%Y-%m-%d'\n        - type: bucket\n          value:\n            fn::toJSON:\n              tagName: temperature\n              numberOfBuckets: 10\n```\n{{% /example %}}\n{{% /examples %}}",
             "properties": {
                 "accountId": {
                     "type": "string",
@@ -303,7 +372,14 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                    "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                },
+                "partitionTemplates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/influxdb3:index/DatabasePartitionTemplate:DatabasePartitionTemplate"
+                    },
+                    "description": "A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.\n"
                 },
                 "retentionPeriod": {
                     "type": "integer",
@@ -316,6 +392,7 @@
                 "maxColumnsPerTable",
                 "maxTables",
                 "name",
+                "partitionTemplates",
                 "retentionPeriod"
             ],
             "inputProperties": {
@@ -329,7 +406,14 @@
                 },
                 "name": {
                     "type": "string",
-                    "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                    "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                },
+                "partitionTemplates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/influxdb3:index/DatabasePartitionTemplate:DatabasePartitionTemplate"
+                    },
+                    "description": "A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.\n"
                 },
                 "retentionPeriod": {
                     "type": "integer",
@@ -357,7 +441,14 @@
                     },
                     "name": {
                         "type": "string",
-                        "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                        "description": "The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.\n"
+                    },
+                    "partitionTemplates": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/influxdb3:index/DatabasePartitionTemplate:DatabasePartitionTemplate"
+                        },
+                        "description": "A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.\n"
                     },
                     "retentionPeriod": {
                         "type": "integer",
@@ -503,6 +594,13 @@
                         "type": "string",
                         "description": "The name of the cluster database.\n"
                     },
+                    "partitionTemplates": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/influxdb3:index/getDatabasePartitionTemplate:getDatabasePartitionTemplate"
+                        },
+                        "description": "The template partitioning of the cluster database.\n"
+                    },
                     "retentionPeriod": {
                         "type": "integer",
                         "description": "The retention period of the cluster database in nanoseconds.\n"
@@ -515,6 +613,7 @@
                     "maxColumnsPerTable",
                     "maxTables",
                     "name",
+                    "partitionTemplates",
                     "retentionPeriod",
                     "id"
                 ]

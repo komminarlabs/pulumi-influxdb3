@@ -8,6 +8,7 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from . import outputs
 
 __all__ = [
     'GetDatabaseResult',
@@ -21,7 +22,7 @@ class GetDatabaseResult:
     """
     A collection of values returned by getDatabase.
     """
-    def __init__(__self__, account_id=None, cluster_id=None, id=None, max_columns_per_table=None, max_tables=None, name=None, retention_period=None):
+    def __init__(__self__, account_id=None, cluster_id=None, id=None, max_columns_per_table=None, max_tables=None, name=None, partition_templates=None, retention_period=None):
         if account_id and not isinstance(account_id, str):
             raise TypeError("Expected argument 'account_id' to be a str")
         pulumi.set(__self__, "account_id", account_id)
@@ -40,6 +41,9 @@ class GetDatabaseResult:
         if name and not isinstance(name, str):
             raise TypeError("Expected argument 'name' to be a str")
         pulumi.set(__self__, "name", name)
+        if partition_templates and not isinstance(partition_templates, list):
+            raise TypeError("Expected argument 'partition_templates' to be a list")
+        pulumi.set(__self__, "partition_templates", partition_templates)
         if retention_period and not isinstance(retention_period, int):
             raise TypeError("Expected argument 'retention_period' to be a int")
         pulumi.set(__self__, "retention_period", retention_period)
@@ -93,6 +97,14 @@ class GetDatabaseResult:
         return pulumi.get(self, "name")
 
     @property
+    @pulumi.getter(name="partitionTemplates")
+    def partition_templates(self) -> Sequence['outputs.GetDatabasePartitionTemplateResult']:
+        """
+        The template partitioning of the cluster database.
+        """
+        return pulumi.get(self, "partition_templates")
+
+    @property
     @pulumi.getter(name="retentionPeriod")
     def retention_period(self) -> int:
         """
@@ -113,6 +125,7 @@ class AwaitableGetDatabaseResult(GetDatabaseResult):
             max_columns_per_table=self.max_columns_per_table,
             max_tables=self.max_tables,
             name=self.name,
+            partition_templates=self.partition_templates,
             retention_period=self.retention_period)
 
 
@@ -136,6 +149,7 @@ def get_database(name: Optional[str] = None,
         max_columns_per_table=pulumi.get(__ret__, 'max_columns_per_table'),
         max_tables=pulumi.get(__ret__, 'max_tables'),
         name=pulumi.get(__ret__, 'name'),
+        partition_templates=pulumi.get(__ret__, 'partition_templates'),
         retention_period=pulumi.get(__ret__, 'retention_period'))
 
 
