@@ -73,8 +73,8 @@ github.com/hashicorp/yamux v0.1.1/go.mod h1:CtWFDAQgb7dxtzFs4tWbplKIe2jSi3+5vKbg
 github.com/juju/gnuflag v0.0.0-20171113085948-2ce1bb71843d/go.mod h1:2PavIy+JPciBPrBUjwbNvtwB6RQlve+hkpll6QSNmOE=
 github.com/komminarlabs/influxdb3 v0.1.0 h1:C/Ka8mzYABMXZIAjvZYw+ZXlk0jo6u9shJ7vPgKoseo=
 github.com/komminarlabs/influxdb3 v0.1.0/go.mod h1:yEFMuSRwwd1/nO9tKtc1HapjEm5h1Ac/3+or3ckkURE=
-github.com/komminarlabs/terraform-provider-influxdb3 v1.0.1 h1:ZVPHZvFPuclTBp+86JvcElc4L0gGYA0+GK4ZWE5zxgA=
-github.com/komminarlabs/terraform-provider-influxdb3 v1.0.1/go.mod h1:w8P/TgdYA5dtoba+5ELEzXEzz8gEiqmcfPFJ3gtEUuU=
+github.com/komminarlabs/terraform-provider-influxdb3 v1.2.1 h1:DHRUMPfoqis7GcsJTiK8xc68WE/UxKmHzkHrZ4w5Rvs=
+github.com/komminarlabs/terraform-provider-influxdb3 v1.2.1/go.mod h1:w8P/TgdYA5dtoba+5ELEzXEzz8gEiqmcfPFJ3gtEUuU=
 github.com/mattn/go-colorable v0.1.9/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=
 github.com/mattn/go-colorable v0.1.12/go.mod h1:u5H1YNBxpqRaxsYJYSkiCWKzEfiAb1Gb520KVy5xxl4=
 github.com/mattn/go-colorable v0.1.13 h1:fFA4WZxdEF4tXPZVKMLwD8oUnCTTo08duU7wxecdEvA=

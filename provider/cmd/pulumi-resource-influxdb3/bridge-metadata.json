@@ -3,7 +3,12 @@
         "resources": {
             "influxdb3_database": {
                 "current": "influxdb3:index/database:Database",
-                "majorVersion": 1
+                "majorVersion": 1,
+                "fields": {
+                    "partition_template": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "influxdb3_token": {
                 "current": "influxdb3:index/token:Token",
@@ -18,14 +23,26 @@
         "datasources": {
             "influxdb3_database": {
                 "current": "influxdb3:index/getDatabase:getDatabase",
-                "majorVersion": 1
+                "majorVersion": 1,
+                "fields": {
+                    "partition_template": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "influxdb3_databases": {
                 "current": "influxdb3:index/getDatabases:getDatabases",
                 "majorVersion": 1,
                 "fields": {
                     "databases": {
-                        "maxItemsOne": false
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "partition_template": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
                     }
                 }
             },

@@ -35,6 +35,10 @@ namespace KomminarLabs.InfluxDB3.Outputs
         /// </summary>
         public readonly string Name;
         /// <summary>
+        /// The template partitioning of the cluster database.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.GetDatabasesDatabasePartitionTemplateResult> PartitionTemplates;
+        /// <summary>
         /// The retention period of the cluster database in nanoseconds.
         /// </summary>
         public readonly int RetentionPeriod;
@@ -51,6 +55,8 @@ namespace KomminarLabs.InfluxDB3.Outputs
 
             string name,
 
+            ImmutableArray<Outputs.GetDatabasesDatabasePartitionTemplateResult> partitionTemplates,
+
             int retentionPeriod)
         {
             AccountId = accountId;
@@ -58,6 +64,7 @@ namespace KomminarLabs.InfluxDB3.Outputs
             MaxColumnsPerTable = maxColumnsPerTable;
             MaxTables = maxTables;
             Name = name;
+            PartitionTemplates = partitionTemplates;
             RetentionPeriod = retentionPeriod;
         }
     }

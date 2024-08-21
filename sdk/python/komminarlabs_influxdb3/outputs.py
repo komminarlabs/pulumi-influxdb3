@@ -11,12 +11,44 @@ from . import _utilities
 from . import outputs
 
 __all__ = [
+    'DatabasePartitionTemplate',
     'TokenPermission',
+    'GetDatabasePartitionTemplateResult',
     'GetDatabasesDatabaseResult',
+    'GetDatabasesDatabasePartitionTemplateResult',
     'GetTokenPermissionResult',
     'GetTokensTokenResult',
     'GetTokensTokenPermissionResult',
 ]
+
+@pulumi.output_type
+class DatabasePartitionTemplate(dict):
+    def __init__(__self__, *,
+                 type: str,
+                 value: str):
+        """
+        :param str type: The type of template part. Valid values are `bucket`, `tag` or `time`.
+        :param str value: The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+        """
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of template part. Valid values are `bucket`, `tag` or `time`.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+        """
+        return pulumi.get(self, "value")
+
 
 @pulumi.output_type
 class TokenPermission(dict):
@@ -48,6 +80,35 @@ class TokenPermission(dict):
 
 
 @pulumi.output_type
+class GetDatabasePartitionTemplateResult(dict):
+    def __init__(__self__, *,
+                 type: str,
+                 value: str):
+        """
+        :param str type: The type of template part.
+        :param str value: The value of template part.
+        """
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of template part.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of template part.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
 class GetDatabasesDatabaseResult(dict):
     def __init__(__self__, *,
                  account_id: str,
@@ -55,6 +116,7 @@ class GetDatabasesDatabaseResult(dict):
                  max_columns_per_table: int,
                  max_tables: int,
                  name: str,
+                 partition_templates: Sequence['outputs.GetDatabasesDatabasePartitionTemplateResult'],
                  retention_period: int):
         """
         :param str account_id: The ID of the account that the cluster belongs to.
@@ -62,6 +124,7 @@ class GetDatabasesDatabaseResult(dict):
         :param int max_columns_per_table: The maximum number of columns per table for the cluster database.
         :param int max_tables: The maximum number of tables for the cluster database.
         :param str name: The name of the cluster database.
+        :param Sequence['GetDatabasesDatabasePartitionTemplateArgs'] partition_templates: The template partitioning of the cluster database.
         :param int retention_period: The retention period of the cluster database in nanoseconds.
         """
         pulumi.set(__self__, "account_id", account_id)
@@ -69,6 +132,7 @@ class GetDatabasesDatabaseResult(dict):
         pulumi.set(__self__, "max_columns_per_table", max_columns_per_table)
         pulumi.set(__self__, "max_tables", max_tables)
         pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "partition_templates", partition_templates)
         pulumi.set(__self__, "retention_period", retention_period)
 
     @property
@@ -112,12 +176,49 @@ class GetDatabasesDatabaseResult(dict):
         return pulumi.get(self, "name")
 
     @property
+    @pulumi.getter(name="partitionTemplates")
+    def partition_templates(self) -> Sequence['outputs.GetDatabasesDatabasePartitionTemplateResult']:
+        """
+        The template partitioning of the cluster database.
+        """
+        return pulumi.get(self, "partition_templates")
+
+    @property
     @pulumi.getter(name="retentionPeriod")
     def retention_period(self) -> int:
         """
         The retention period of the cluster database in nanoseconds.
         """
         return pulumi.get(self, "retention_period")
+
+
+@pulumi.output_type
+class GetDatabasesDatabasePartitionTemplateResult(dict):
+    def __init__(__self__, *,
+                 type: str,
+                 value: str):
+        """
+        :param str type: The type of template part.
+        :param str value: The value of template part.
+        """
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        The type of template part.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of template part.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type

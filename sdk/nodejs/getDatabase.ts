@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "./types/input";
+import * as outputs from "./types/output";
 import * as utilities from "./utilities";
 
 /**
@@ -53,6 +55,10 @@ export interface GetDatabaseResult {
      * The name of the cluster database.
      */
     readonly name: string;
+    /**
+     * The template partitioning of the cluster database.
+     */
+    readonly partitionTemplates: outputs.GetDatabasePartitionTemplate[];
     /**
      * The retention period of the cluster database in nanoseconds.
      */

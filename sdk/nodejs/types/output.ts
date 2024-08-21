@@ -5,6 +5,28 @@ import * as pulumi from "@pulumi/pulumi";
 import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 
+export interface DatabasePartitionTemplate {
+    /**
+     * The type of template part. Valid values are `bucket`, `tag` or `time`.
+     */
+    type: string;
+    /**
+     * The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+     */
+    value: string;
+}
+
+export interface GetDatabasePartitionTemplate {
+    /**
+     * The type of template part.
+     */
+    type: string;
+    /**
+     * The value of template part.
+     */
+    value: string;
+}
+
 export interface GetDatabasesDatabase {
     /**
      * The ID of the account that the cluster belongs to.
@@ -27,9 +49,24 @@ export interface GetDatabasesDatabase {
      */
     name: string;
     /**
+     * The template partitioning of the cluster database.
+     */
+    partitionTemplates: outputs.GetDatabasesDatabasePartitionTemplate[];
+    /**
      * The retention period of the cluster database in nanoseconds.
      */
     retentionPeriod: number;
+}
+
+export interface GetDatabasesDatabasePartitionTemplate {
+    /**
+     * The type of template part.
+     */
+    type: string;
+    /**
+     * The value of template part.
+     */
+    value: string;
 }
 
 export interface GetTokenPermission {

@@ -42,6 +42,8 @@ type LookupDatabaseResult struct {
 	MaxTables int `pulumi:"maxTables"`
 	// The name of the cluster database.
 	Name string `pulumi:"name"`
+	// The template partitioning of the cluster database.
+	PartitionTemplates []GetDatabasePartitionTemplate `pulumi:"partitionTemplates"`
 	// The retention period of the cluster database in nanoseconds.
 	RetentionPeriod int `pulumi:"retentionPeriod"`
 }
@@ -112,6 +114,11 @@ func (o LookupDatabaseResultOutput) MaxTables() pulumi.IntOutput {
 // The name of the cluster database.
 func (o LookupDatabaseResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupDatabaseResult) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The template partitioning of the cluster database.
+func (o LookupDatabaseResultOutput) PartitionTemplates() GetDatabasePartitionTemplateArrayOutput {
+	return o.ApplyT(func(v LookupDatabaseResult) []GetDatabasePartitionTemplate { return v.PartitionTemplates }).(GetDatabasePartitionTemplateArrayOutput)
 }
 
 // The retention period of the cluster database in nanoseconds.

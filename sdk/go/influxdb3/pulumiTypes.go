@@ -13,6 +13,112 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type DatabasePartitionTemplate struct {
+	// The type of template part. Valid values are `bucket`, `tag` or `time`.
+	Type string `pulumi:"type"`
+	// The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+	Value string `pulumi:"value"`
+}
+
+// DatabasePartitionTemplateInput is an input type that accepts DatabasePartitionTemplateArgs and DatabasePartitionTemplateOutput values.
+// You can construct a concrete instance of `DatabasePartitionTemplateInput` via:
+//
+//	DatabasePartitionTemplateArgs{...}
+type DatabasePartitionTemplateInput interface {
+	pulumi.Input
+
+	ToDatabasePartitionTemplateOutput() DatabasePartitionTemplateOutput
+	ToDatabasePartitionTemplateOutputWithContext(context.Context) DatabasePartitionTemplateOutput
+}
+
+type DatabasePartitionTemplateArgs struct {
+	// The type of template part. Valid values are `bucket`, `tag` or `time`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (DatabasePartitionTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (i DatabasePartitionTemplateArgs) ToDatabasePartitionTemplateOutput() DatabasePartitionTemplateOutput {
+	return i.ToDatabasePartitionTemplateOutputWithContext(context.Background())
+}
+
+func (i DatabasePartitionTemplateArgs) ToDatabasePartitionTemplateOutputWithContext(ctx context.Context) DatabasePartitionTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatabasePartitionTemplateOutput)
+}
+
+// DatabasePartitionTemplateArrayInput is an input type that accepts DatabasePartitionTemplateArray and DatabasePartitionTemplateArrayOutput values.
+// You can construct a concrete instance of `DatabasePartitionTemplateArrayInput` via:
+//
+//	DatabasePartitionTemplateArray{ DatabasePartitionTemplateArgs{...} }
+type DatabasePartitionTemplateArrayInput interface {
+	pulumi.Input
+
+	ToDatabasePartitionTemplateArrayOutput() DatabasePartitionTemplateArrayOutput
+	ToDatabasePartitionTemplateArrayOutputWithContext(context.Context) DatabasePartitionTemplateArrayOutput
+}
+
+type DatabasePartitionTemplateArray []DatabasePartitionTemplateInput
+
+func (DatabasePartitionTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (i DatabasePartitionTemplateArray) ToDatabasePartitionTemplateArrayOutput() DatabasePartitionTemplateArrayOutput {
+	return i.ToDatabasePartitionTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i DatabasePartitionTemplateArray) ToDatabasePartitionTemplateArrayOutputWithContext(ctx context.Context) DatabasePartitionTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DatabasePartitionTemplateArrayOutput)
+}
+
+type DatabasePartitionTemplateOutput struct{ *pulumi.OutputState }
+
+func (DatabasePartitionTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (o DatabasePartitionTemplateOutput) ToDatabasePartitionTemplateOutput() DatabasePartitionTemplateOutput {
+	return o
+}
+
+func (o DatabasePartitionTemplateOutput) ToDatabasePartitionTemplateOutputWithContext(ctx context.Context) DatabasePartitionTemplateOutput {
+	return o
+}
+
+// The type of template part. Valid values are `bucket`, `tag` or `time`.
+func (o DatabasePartitionTemplateOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v DatabasePartitionTemplate) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+func (o DatabasePartitionTemplateOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v DatabasePartitionTemplate) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type DatabasePartitionTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (DatabasePartitionTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (o DatabasePartitionTemplateArrayOutput) ToDatabasePartitionTemplateArrayOutput() DatabasePartitionTemplateArrayOutput {
+	return o
+}
+
+func (o DatabasePartitionTemplateArrayOutput) ToDatabasePartitionTemplateArrayOutputWithContext(ctx context.Context) DatabasePartitionTemplateArrayOutput {
+	return o
+}
+
+func (o DatabasePartitionTemplateArrayOutput) Index(i pulumi.IntInput) DatabasePartitionTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DatabasePartitionTemplate {
+		return vs[0].([]DatabasePartitionTemplate)[vs[1].(int)]
+	}).(DatabasePartitionTemplateOutput)
+}
+
 type TokenPermission struct {
 	// The action the database token permission allows. Valid values are `read` or `write`.
 	Action string `pulumi:"action"`
@@ -119,6 +225,112 @@ func (o TokenPermissionArrayOutput) Index(i pulumi.IntInput) TokenPermissionOutp
 	}).(TokenPermissionOutput)
 }
 
+type GetDatabasePartitionTemplate struct {
+	// The type of template part.
+	Type string `pulumi:"type"`
+	// The value of template part.
+	Value string `pulumi:"value"`
+}
+
+// GetDatabasePartitionTemplateInput is an input type that accepts GetDatabasePartitionTemplateArgs and GetDatabasePartitionTemplateOutput values.
+// You can construct a concrete instance of `GetDatabasePartitionTemplateInput` via:
+//
+//	GetDatabasePartitionTemplateArgs{...}
+type GetDatabasePartitionTemplateInput interface {
+	pulumi.Input
+
+	ToGetDatabasePartitionTemplateOutput() GetDatabasePartitionTemplateOutput
+	ToGetDatabasePartitionTemplateOutputWithContext(context.Context) GetDatabasePartitionTemplateOutput
+}
+
+type GetDatabasePartitionTemplateArgs struct {
+	// The type of template part.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of template part.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetDatabasePartitionTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (i GetDatabasePartitionTemplateArgs) ToGetDatabasePartitionTemplateOutput() GetDatabasePartitionTemplateOutput {
+	return i.ToGetDatabasePartitionTemplateOutputWithContext(context.Background())
+}
+
+func (i GetDatabasePartitionTemplateArgs) ToGetDatabasePartitionTemplateOutputWithContext(ctx context.Context) GetDatabasePartitionTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDatabasePartitionTemplateOutput)
+}
+
+// GetDatabasePartitionTemplateArrayInput is an input type that accepts GetDatabasePartitionTemplateArray and GetDatabasePartitionTemplateArrayOutput values.
+// You can construct a concrete instance of `GetDatabasePartitionTemplateArrayInput` via:
+//
+//	GetDatabasePartitionTemplateArray{ GetDatabasePartitionTemplateArgs{...} }
+type GetDatabasePartitionTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetDatabasePartitionTemplateArrayOutput() GetDatabasePartitionTemplateArrayOutput
+	ToGetDatabasePartitionTemplateArrayOutputWithContext(context.Context) GetDatabasePartitionTemplateArrayOutput
+}
+
+type GetDatabasePartitionTemplateArray []GetDatabasePartitionTemplateInput
+
+func (GetDatabasePartitionTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (i GetDatabasePartitionTemplateArray) ToGetDatabasePartitionTemplateArrayOutput() GetDatabasePartitionTemplateArrayOutput {
+	return i.ToGetDatabasePartitionTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetDatabasePartitionTemplateArray) ToGetDatabasePartitionTemplateArrayOutputWithContext(ctx context.Context) GetDatabasePartitionTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDatabasePartitionTemplateArrayOutput)
+}
+
+type GetDatabasePartitionTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetDatabasePartitionTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (o GetDatabasePartitionTemplateOutput) ToGetDatabasePartitionTemplateOutput() GetDatabasePartitionTemplateOutput {
+	return o
+}
+
+func (o GetDatabasePartitionTemplateOutput) ToGetDatabasePartitionTemplateOutputWithContext(ctx context.Context) GetDatabasePartitionTemplateOutput {
+	return o
+}
+
+// The type of template part.
+func (o GetDatabasePartitionTemplateOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDatabasePartitionTemplate) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of template part.
+func (o GetDatabasePartitionTemplateOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDatabasePartitionTemplate) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetDatabasePartitionTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDatabasePartitionTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (o GetDatabasePartitionTemplateArrayOutput) ToGetDatabasePartitionTemplateArrayOutput() GetDatabasePartitionTemplateArrayOutput {
+	return o
+}
+
+func (o GetDatabasePartitionTemplateArrayOutput) ToGetDatabasePartitionTemplateArrayOutputWithContext(ctx context.Context) GetDatabasePartitionTemplateArrayOutput {
+	return o
+}
+
+func (o GetDatabasePartitionTemplateArrayOutput) Index(i pulumi.IntInput) GetDatabasePartitionTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDatabasePartitionTemplate {
+		return vs[0].([]GetDatabasePartitionTemplate)[vs[1].(int)]
+	}).(GetDatabasePartitionTemplateOutput)
+}
+
 type GetDatabasesDatabase struct {
 	// The ID of the account that the cluster belongs to.
 	AccountId string `pulumi:"accountId"`
@@ -130,6 +342,8 @@ type GetDatabasesDatabase struct {
 	MaxTables int `pulumi:"maxTables"`
 	// The name of the cluster database.
 	Name string `pulumi:"name"`
+	// The template partitioning of the cluster database.
+	PartitionTemplates []GetDatabasesDatabasePartitionTemplate `pulumi:"partitionTemplates"`
 	// The retention period of the cluster database in nanoseconds.
 	RetentionPeriod int `pulumi:"retentionPeriod"`
 }
@@ -156,6 +370,8 @@ type GetDatabasesDatabaseArgs struct {
 	MaxTables pulumi.IntInput `pulumi:"maxTables"`
 	// The name of the cluster database.
 	Name pulumi.StringInput `pulumi:"name"`
+	// The template partitioning of the cluster database.
+	PartitionTemplates GetDatabasesDatabasePartitionTemplateArrayInput `pulumi:"partitionTemplates"`
 	// The retention period of the cluster database in nanoseconds.
 	RetentionPeriod pulumi.IntInput `pulumi:"retentionPeriod"`
 }
@@ -236,6 +452,11 @@ func (o GetDatabasesDatabaseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDatabasesDatabase) string { return v.Name }).(pulumi.StringOutput)
 }
 
+// The template partitioning of the cluster database.
+func (o GetDatabasesDatabaseOutput) PartitionTemplates() GetDatabasesDatabasePartitionTemplateArrayOutput {
+	return o.ApplyT(func(v GetDatabasesDatabase) []GetDatabasesDatabasePartitionTemplate { return v.PartitionTemplates }).(GetDatabasesDatabasePartitionTemplateArrayOutput)
+}
+
 // The retention period of the cluster database in nanoseconds.
 func (o GetDatabasesDatabaseOutput) RetentionPeriod() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDatabasesDatabase) int { return v.RetentionPeriod }).(pulumi.IntOutput)
@@ -259,6 +480,112 @@ func (o GetDatabasesDatabaseArrayOutput) Index(i pulumi.IntInput) GetDatabasesDa
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDatabasesDatabase {
 		return vs[0].([]GetDatabasesDatabase)[vs[1].(int)]
 	}).(GetDatabasesDatabaseOutput)
+}
+
+type GetDatabasesDatabasePartitionTemplate struct {
+	// The type of template part.
+	Type string `pulumi:"type"`
+	// The value of template part.
+	Value string `pulumi:"value"`
+}
+
+// GetDatabasesDatabasePartitionTemplateInput is an input type that accepts GetDatabasesDatabasePartitionTemplateArgs and GetDatabasesDatabasePartitionTemplateOutput values.
+// You can construct a concrete instance of `GetDatabasesDatabasePartitionTemplateInput` via:
+//
+//	GetDatabasesDatabasePartitionTemplateArgs{...}
+type GetDatabasesDatabasePartitionTemplateInput interface {
+	pulumi.Input
+
+	ToGetDatabasesDatabasePartitionTemplateOutput() GetDatabasesDatabasePartitionTemplateOutput
+	ToGetDatabasesDatabasePartitionTemplateOutputWithContext(context.Context) GetDatabasesDatabasePartitionTemplateOutput
+}
+
+type GetDatabasesDatabasePartitionTemplateArgs struct {
+	// The type of template part.
+	Type pulumi.StringInput `pulumi:"type"`
+	// The value of template part.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetDatabasesDatabasePartitionTemplateArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDatabasesDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (i GetDatabasesDatabasePartitionTemplateArgs) ToGetDatabasesDatabasePartitionTemplateOutput() GetDatabasesDatabasePartitionTemplateOutput {
+	return i.ToGetDatabasesDatabasePartitionTemplateOutputWithContext(context.Background())
+}
+
+func (i GetDatabasesDatabasePartitionTemplateArgs) ToGetDatabasesDatabasePartitionTemplateOutputWithContext(ctx context.Context) GetDatabasesDatabasePartitionTemplateOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDatabasesDatabasePartitionTemplateOutput)
+}
+
+// GetDatabasesDatabasePartitionTemplateArrayInput is an input type that accepts GetDatabasesDatabasePartitionTemplateArray and GetDatabasesDatabasePartitionTemplateArrayOutput values.
+// You can construct a concrete instance of `GetDatabasesDatabasePartitionTemplateArrayInput` via:
+//
+//	GetDatabasesDatabasePartitionTemplateArray{ GetDatabasesDatabasePartitionTemplateArgs{...} }
+type GetDatabasesDatabasePartitionTemplateArrayInput interface {
+	pulumi.Input
+
+	ToGetDatabasesDatabasePartitionTemplateArrayOutput() GetDatabasesDatabasePartitionTemplateArrayOutput
+	ToGetDatabasesDatabasePartitionTemplateArrayOutputWithContext(context.Context) GetDatabasesDatabasePartitionTemplateArrayOutput
+}
+
+type GetDatabasesDatabasePartitionTemplateArray []GetDatabasesDatabasePartitionTemplateInput
+
+func (GetDatabasesDatabasePartitionTemplateArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDatabasesDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (i GetDatabasesDatabasePartitionTemplateArray) ToGetDatabasesDatabasePartitionTemplateArrayOutput() GetDatabasesDatabasePartitionTemplateArrayOutput {
+	return i.ToGetDatabasesDatabasePartitionTemplateArrayOutputWithContext(context.Background())
+}
+
+func (i GetDatabasesDatabasePartitionTemplateArray) ToGetDatabasesDatabasePartitionTemplateArrayOutputWithContext(ctx context.Context) GetDatabasesDatabasePartitionTemplateArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDatabasesDatabasePartitionTemplateArrayOutput)
+}
+
+type GetDatabasesDatabasePartitionTemplateOutput struct{ *pulumi.OutputState }
+
+func (GetDatabasesDatabasePartitionTemplateOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDatabasesDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (o GetDatabasesDatabasePartitionTemplateOutput) ToGetDatabasesDatabasePartitionTemplateOutput() GetDatabasesDatabasePartitionTemplateOutput {
+	return o
+}
+
+func (o GetDatabasesDatabasePartitionTemplateOutput) ToGetDatabasesDatabasePartitionTemplateOutputWithContext(ctx context.Context) GetDatabasesDatabasePartitionTemplateOutput {
+	return o
+}
+
+// The type of template part.
+func (o GetDatabasesDatabasePartitionTemplateOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDatabasesDatabasePartitionTemplate) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// The value of template part.
+func (o GetDatabasesDatabasePartitionTemplateOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDatabasesDatabasePartitionTemplate) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetDatabasesDatabasePartitionTemplateArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDatabasesDatabasePartitionTemplateArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDatabasesDatabasePartitionTemplate)(nil)).Elem()
+}
+
+func (o GetDatabasesDatabasePartitionTemplateArrayOutput) ToGetDatabasesDatabasePartitionTemplateArrayOutput() GetDatabasesDatabasePartitionTemplateArrayOutput {
+	return o
+}
+
+func (o GetDatabasesDatabasePartitionTemplateArrayOutput) ToGetDatabasesDatabasePartitionTemplateArrayOutputWithContext(ctx context.Context) GetDatabasesDatabasePartitionTemplateArrayOutput {
+	return o
+}
+
+func (o GetDatabasesDatabasePartitionTemplateArrayOutput) Index(i pulumi.IntInput) GetDatabasesDatabasePartitionTemplateOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDatabasesDatabasePartitionTemplate {
+		return vs[0].([]GetDatabasesDatabasePartitionTemplate)[vs[1].(int)]
+	}).(GetDatabasesDatabasePartitionTemplateOutput)
 }
 
 type GetTokenPermission struct {
@@ -625,20 +952,32 @@ func (o GetTokensTokenPermissionArrayOutput) Index(i pulumi.IntInput) GetTokensT
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabasePartitionTemplateInput)(nil)).Elem(), DatabasePartitionTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DatabasePartitionTemplateArrayInput)(nil)).Elem(), DatabasePartitionTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TokenPermissionInput)(nil)).Elem(), TokenPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TokenPermissionArrayInput)(nil)).Elem(), TokenPermissionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasePartitionTemplateInput)(nil)).Elem(), GetDatabasePartitionTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasePartitionTemplateArrayInput)(nil)).Elem(), GetDatabasePartitionTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasesDatabaseInput)(nil)).Elem(), GetDatabasesDatabaseArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasesDatabaseArrayInput)(nil)).Elem(), GetDatabasesDatabaseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasesDatabasePartitionTemplateInput)(nil)).Elem(), GetDatabasesDatabasePartitionTemplateArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDatabasesDatabasePartitionTemplateArrayInput)(nil)).Elem(), GetDatabasesDatabasePartitionTemplateArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokenPermissionInput)(nil)).Elem(), GetTokenPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokenPermissionArrayInput)(nil)).Elem(), GetTokenPermissionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenInput)(nil)).Elem(), GetTokensTokenArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenArrayInput)(nil)).Elem(), GetTokensTokenArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenPermissionInput)(nil)).Elem(), GetTokensTokenPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTokensTokenPermissionArrayInput)(nil)).Elem(), GetTokensTokenPermissionArray{})
+	pulumi.RegisterOutputType(DatabasePartitionTemplateOutput{})
+	pulumi.RegisterOutputType(DatabasePartitionTemplateArrayOutput{})
 	pulumi.RegisterOutputType(TokenPermissionOutput{})
 	pulumi.RegisterOutputType(TokenPermissionArrayOutput{})
+	pulumi.RegisterOutputType(GetDatabasePartitionTemplateOutput{})
+	pulumi.RegisterOutputType(GetDatabasePartitionTemplateArrayOutput{})
 	pulumi.RegisterOutputType(GetDatabasesDatabaseOutput{})
 	pulumi.RegisterOutputType(GetDatabasesDatabaseArrayOutput{})
+	pulumi.RegisterOutputType(GetDatabasesDatabasePartitionTemplateOutput{})
+	pulumi.RegisterOutputType(GetDatabasesDatabasePartitionTemplateArrayOutput{})
 	pulumi.RegisterOutputType(GetTokenPermissionOutput{})
 	pulumi.RegisterOutputType(GetTokenPermissionArrayOutput{})
 	pulumi.RegisterOutputType(GetTokensTokenOutput{})

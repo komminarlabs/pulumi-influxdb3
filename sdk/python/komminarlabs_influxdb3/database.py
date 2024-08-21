@@ -8,6 +8,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from . import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['DatabaseArgs', 'Database']
 
@@ -17,12 +19,14 @@ class DatabaseArgs:
                  max_columns_per_table: Optional[pulumi.Input[int]] = None,
                  max_tables: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 partition_templates: Optional[pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Database resource.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]] partition_templates: A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         if max_columns_per_table is not None:
@@ -31,6 +35,8 @@ class DatabaseArgs:
             pulumi.set(__self__, "max_tables", max_tables)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if partition_templates is not None:
+            pulumi.set(__self__, "partition_templates", partition_templates)
         if retention_period is not None:
             pulumi.set(__self__, "retention_period", retention_period)
 
@@ -62,13 +68,25 @@ class DatabaseArgs:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         """
         return pulumi.get(self, "name")
 
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="partitionTemplates")
+    def partition_templates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]]]:
+        """
+        A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
+        """
+        return pulumi.get(self, "partition_templates")
+
+    @partition_templates.setter
+    def partition_templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]]]):
+        pulumi.set(self, "partition_templates", value)
 
     @property
     @pulumi.getter(name="retentionPeriod")
@@ -91,6 +109,7 @@ class _DatabaseState:
                  max_columns_per_table: Optional[pulumi.Input[int]] = None,
                  max_tables: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 partition_templates: Optional[pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None):
         """
         Input properties used for looking up and filtering Database resources.
@@ -98,7 +117,8 @@ class _DatabaseState:
         :param pulumi.Input[str] cluster_id: The ID of the cluster that you want to manage.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]] partition_templates: A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         if account_id is not None:
@@ -111,6 +131,8 @@ class _DatabaseState:
             pulumi.set(__self__, "max_tables", max_tables)
         if name is not None:
             pulumi.set(__self__, "name", name)
+        if partition_templates is not None:
+            pulumi.set(__self__, "partition_templates", partition_templates)
         if retention_period is not None:
             pulumi.set(__self__, "retention_period", retention_period)
 
@@ -166,13 +188,25 @@ class _DatabaseState:
     @pulumi.getter
     def name(self) -> Optional[pulumi.Input[str]]:
         """
-        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         """
         return pulumi.get(self, "name")
 
     @name.setter
     def name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter(name="partitionTemplates")
+    def partition_templates(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]]]:
+        """
+        A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
+        """
+        return pulumi.get(self, "partition_templates")
+
+    @partition_templates.setter
+    def partition_templates(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['DatabasePartitionTemplateArgs']]]]):
+        pulumi.set(self, "partition_templates", value)
 
     @property
     @pulumi.getter(name="retentionPeriod")
@@ -195,16 +229,50 @@ class Database(pulumi.CustomResource):
                  max_columns_per_table: Optional[pulumi.Input[int]] = None,
                  max_tables: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 partition_templates: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DatabasePartitionTemplateArgs']]]]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         """
         Creates and manages a database.
 
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import json
+        import komminarlabs_influxdb3 as influxdb3
+
+        signals = influxdb3.Database("signals",
+            retention_period=604800,
+            partition_templates=[
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="tag",
+                    value="line",
+                ),
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="tag",
+                    value="station",
+                ),
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="time",
+                    value="%Y-%m-%d",
+                ),
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="bucket",
+                    value=json.dumps({
+                        "tagName": "temperature",
+                        "numberOfBuckets": 10,
+                    }),
+                ),
+            ])
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DatabasePartitionTemplateArgs']]]] partition_templates: A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         ...
@@ -215,6 +283,38 @@ class Database(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
         Creates and manages a database.
+
+        ## Example Usage
+
+        ```python
+        import pulumi
+        import json
+        import komminarlabs_influxdb3 as influxdb3
+
+        signals = influxdb3.Database("signals",
+            retention_period=604800,
+            partition_templates=[
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="tag",
+                    value="line",
+                ),
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="tag",
+                    value="station",
+                ),
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="time",
+                    value="%Y-%m-%d",
+                ),
+                influxdb3.DatabasePartitionTemplateArgs(
+                    type="bucket",
+                    value=json.dumps({
+                        "tagName": "temperature",
+                        "numberOfBuckets": 10,
+                    }),
+                ),
+            ])
+        ```
 
         :param str resource_name: The name of the resource.
         :param DatabaseArgs args: The arguments to use to populate this resource's properties.
@@ -234,6 +334,7 @@ class Database(pulumi.CustomResource):
                  max_columns_per_table: Optional[pulumi.Input[int]] = None,
                  max_tables: Optional[pulumi.Input[int]] = None,
                  name: Optional[pulumi.Input[str]] = None,
+                 partition_templates: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DatabasePartitionTemplateArgs']]]]] = None,
                  retention_period: Optional[pulumi.Input[int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -247,6 +348,7 @@ class Database(pulumi.CustomResource):
             __props__.__dict__["max_columns_per_table"] = max_columns_per_table
             __props__.__dict__["max_tables"] = max_tables
             __props__.__dict__["name"] = name
+            __props__.__dict__["partition_templates"] = partition_templates
             __props__.__dict__["retention_period"] = retention_period
             __props__.__dict__["account_id"] = None
             __props__.__dict__["cluster_id"] = None
@@ -265,6 +367,7 @@ class Database(pulumi.CustomResource):
             max_columns_per_table: Optional[pulumi.Input[int]] = None,
             max_tables: Optional[pulumi.Input[int]] = None,
             name: Optional[pulumi.Input[str]] = None,
+            partition_templates: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DatabasePartitionTemplateArgs']]]]] = None,
             retention_period: Optional[pulumi.Input[int]] = None) -> 'Database':
         """
         Get an existing Database resource's state with the given name, id, and optional extra
@@ -277,7 +380,8 @@ class Database(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_id: The ID of the cluster that you want to manage.
         :param pulumi.Input[int] max_columns_per_table: The maximum number of columns per table for the cluster database. The default is `200`
         :param pulumi.Input[int] max_tables: The maximum number of tables for the cluster database. The default is `500`
-        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[str] name: The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['DatabasePartitionTemplateArgs']]]] partition_templates: A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
         :param pulumi.Input[int] retention_period: The retention period of the cluster database in nanoseconds. The default is `0`. If the retention period is not set or is set to `0`, the database will have infinite retention.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -289,6 +393,7 @@ class Database(pulumi.CustomResource):
         __props__.__dict__["max_columns_per_table"] = max_columns_per_table
         __props__.__dict__["max_tables"] = max_tables
         __props__.__dict__["name"] = name
+        __props__.__dict__["partition_templates"] = partition_templates
         __props__.__dict__["retention_period"] = retention_period
         return Database(resource_name, opts=opts, __props__=__props__)
 
@@ -328,9 +433,17 @@ class Database(pulumi.CustomResource):
     @pulumi.getter
     def name(self) -> pulumi.Output[str]:
         """
-        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+        The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
         """
         return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter(name="partitionTemplates")
+    def partition_templates(self) -> pulumi.Output[Sequence['outputs.DatabasePartitionTemplate']]:
+        """
+        A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
+        """
+        return pulumi.get(self, "partition_templates")
 
     @property
     @pulumi.getter(name="retentionPeriod")
