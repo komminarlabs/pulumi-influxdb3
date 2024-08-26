@@ -2,6 +2,10 @@
 
 The InfluxDB V3 Resource Provider lets you manage [InfluxDB V3](https://www.influxdata.com/products/influxdb-overview/#overview) resources.
 
+## Supported InfluxDB flavours
+
+* [InfluxDB Cloud Dedicated](https://www.influxdata.com/products/influxdb-cloud/dedicated/)
+
 ## Installing
 
 This package is available for several languages/platforms:
