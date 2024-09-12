@@ -1357,8 +1357,8 @@ github.com/klauspost/compress v1.16.7/go.mod h1:ntbaceVETuRiXiv4DpjP66DpAtAGkEQs
 github.com/kolo/xmlrpc v0.0.0-20201022064351-38db28db192b/go.mod h1:pcaDhQK0/NJZEvtCO0qQPPropqV0sJOJ6YW7X+9kRwM=
 github.com/komminarlabs/influxdb3 v0.1.0 h1:C/Ka8mzYABMXZIAjvZYw+ZXlk0jo6u9shJ7vPgKoseo=
 github.com/komminarlabs/influxdb3 v0.1.0/go.mod h1:yEFMuSRwwd1/nO9tKtc1HapjEm5h1Ac/3+or3ckkURE=
-github.com/komminarlabs/terraform-provider-influxdb3 v1.2.1 h1:DHRUMPfoqis7GcsJTiK8xc68WE/UxKmHzkHrZ4w5Rvs=
-github.com/komminarlabs/terraform-provider-influxdb3 v1.2.1/go.mod h1:w8P/TgdYA5dtoba+5ELEzXEzz8gEiqmcfPFJ3gtEUuU=
+github.com/komminarlabs/terraform-provider-influxdb3 v1.2.2 h1:Z6mIeg4tiLU0dtuF8cdzVEGVxjkC7eRHnnQ9ehEzz3s=
+github.com/komminarlabs/terraform-provider-influxdb3 v1.2.2/go.mod h1:id8YiWqrmfghW6XexKh2M085essYOXrpN3T0LvrufmQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.2/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.3/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
