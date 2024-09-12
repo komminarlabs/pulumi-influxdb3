@@ -4,7 +4,7 @@ PROJECT          := github.com/komminarlabs/pulumi-influxdb3
 NODE_MODULE_NAME := @komminarlabs/influxdb3
 TF_NAME          := influxdb3
 PROVIDER_PATH    := provider
-PROVIDER_VERSION := 1.2.1
+PROVIDER_VERSION := 1.2.2
 VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
 TFGEN            := pulumi-tfgen-influxdb3
@@ -22,7 +22,7 @@ GO_MINOR_VERSION := $(shell go version | cut -c 14- | cut -d' ' -f1 | cut -d'.' 
 # the (local) version must match the version specified in .github/workflows/release.yml
 # otherwise publkishing the Go SDK of the provider will fail
 REQUIRED_GO_MAJOR_VERSION := 1
-REQUIRED_GO_MINOR_VERSION := 22
+REQUIRED_GO_MINOR_VERSION := 23
 GO_VERSION_VALIDATION_ERR_MSG := Golang version $(REQUIRED_GO_MAJOR_VERSION).$(REQUIRED_GO_MINOR_VERSION) is required
 
 .PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup validate_go_version
