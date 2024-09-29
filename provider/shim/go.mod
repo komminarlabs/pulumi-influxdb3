@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/hashicorp/terraform-plugin-framework v1.11.0
-	github.com/komminarlabs/terraform-provider-influxdb3 v1.2.2
+	github.com/komminarlabs/terraform-provider-influxdb3 v1.2.3
 )
 
 require (

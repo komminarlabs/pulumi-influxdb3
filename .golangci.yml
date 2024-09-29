@@ -27,5 +27,5 @@ linters-settings:
       - blank # Blank section: contains all blank imports.
       - default # Default section: contains all imports that could not be matched to another section type.
       - prefix(github.com/pulumi/) # Custom section: groups all imports with the github.com/pulumi/ prefix.
-      - prefix(github.com/komminarlabs/pulumi-influxdb) # Custom section: local imports
+      - prefix(github.com/komminarlabs/pulumi-influxdb3) # Custom section: local imports
     custom-order: true

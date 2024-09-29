@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+## [1.2.3] - 2024-09-29
+
+### Fixed:
+
+* Fixed error handling.
+  
 ## [1.2.2] - 2024-09-12
 
 ### Added:
