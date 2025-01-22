@@ -1,3 +1,5 @@
+# A bot ensures that these actions get synchronized - do not edit in this repository.
+
 name: PR
 
 on:
@@ -11,7 +13,7 @@ on:
       - .github/**
 
 env:
-  PROVIDER: influxdb3
+  PROVIDER: cratedb
   ORG: komminarlabs
   DOTNETVERSION: |
     6.0.x
