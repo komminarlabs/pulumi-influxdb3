@@ -30,13 +30,9 @@ type GetDatabasesResult struct {
 }
 
 func GetDatabasesOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) GetDatabasesResultOutput {
-	return pulumi.ToOutput(0).ApplyT(func(int) (GetDatabasesResult, error) {
-		r, err := GetDatabases(ctx, opts...)
-		var s GetDatabasesResult
-		if r != nil {
-			s = *r
-		}
-		return s, err
+	return pulumi.ToOutput(0).ApplyT(func(int) (GetDatabasesResultOutput, error) {
+		options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+		return ctx.InvokeOutput("influxdb3:index/getDatabases:getDatabases", nil, GetDatabasesResultOutput{}, options).(GetDatabasesResultOutput), nil
 	}).(GetDatabasesResultOutput)
 }
 

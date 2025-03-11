@@ -332,9 +332,9 @@ func (o GetDatabasePartitionTemplateArrayOutput) Index(i pulumi.IntInput) GetDat
 }
 
 type GetDatabasesDatabase struct {
-	// The ID of the account that the cluster belongs to.
+	// The ID of the account that the database belongs to.
 	AccountId string `pulumi:"accountId"`
-	// The ID of the cluster that you want to manage.
+	// The ID of the cluster that the database belongs to.
 	ClusterId string `pulumi:"clusterId"`
 	// The maximum number of columns per table for the cluster database.
 	MaxColumnsPerTable int `pulumi:"maxColumnsPerTable"`
@@ -360,9 +360,9 @@ type GetDatabasesDatabaseInput interface {
 }
 
 type GetDatabasesDatabaseArgs struct {
-	// The ID of the account that the cluster belongs to.
+	// The ID of the account that the database belongs to.
 	AccountId pulumi.StringInput `pulumi:"accountId"`
-	// The ID of the cluster that you want to manage.
+	// The ID of the cluster that the database belongs to.
 	ClusterId pulumi.StringInput `pulumi:"clusterId"`
 	// The maximum number of columns per table for the cluster database.
 	MaxColumnsPerTable pulumi.IntInput `pulumi:"maxColumnsPerTable"`
@@ -427,12 +427,12 @@ func (o GetDatabasesDatabaseOutput) ToGetDatabasesDatabaseOutputWithContext(ctx 
 	return o
 }
 
-// The ID of the account that the cluster belongs to.
+// The ID of the account that the database belongs to.
 func (o GetDatabasesDatabaseOutput) AccountId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDatabasesDatabase) string { return v.AccountId }).(pulumi.StringOutput)
 }
 
-// The ID of the cluster that you want to manage.
+// The ID of the cluster that the database belongs to.
 func (o GetDatabasesDatabaseOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDatabasesDatabase) string { return v.ClusterId }).(pulumi.StringOutput)
 }

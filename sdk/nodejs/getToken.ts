@@ -10,7 +10,6 @@ import * as utilities from "./utilities";
  * Gets a database token. Use this data source to retrieve information about a database token, including the token's permissions.
  */
 export function getToken(args: GetTokenArgs, opts?: pulumi.InvokeOptions): Promise<GetTokenResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("influxdb3:index/getToken:getToken", {
         "id": args.id,
@@ -63,8 +62,11 @@ export interface GetTokenResult {
 /**
  * Gets a database token. Use this data source to retrieve information about a database token, including the token's permissions.
  */
-export function getTokenOutput(args: GetTokenOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTokenResult> {
-    return pulumi.output(args).apply((a: any) => getToken(a, opts))
+export function getTokenOutput(args: GetTokenOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTokenResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("influxdb3:index/getToken:getToken", {
+        "id": args.id,
+    }, opts);
 }
 
 /**

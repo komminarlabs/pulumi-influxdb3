@@ -16,6 +16,7 @@ import * as utilities from "./utilities";
  * import * as influxdb3 from "@komminarlabs/influxdb3";
  *
  * const signals = new influxdb3.Database("signals", {
+ *     name: "signals",
  *     retentionPeriod: 604800,
  *     partitionTemplates: [
  *         {
@@ -70,11 +71,11 @@ export class Database extends pulumi.CustomResource {
     }
 
     /**
-     * The ID of the account that the cluster belongs to.
+     * The ID of the account that the database belongs to.
      */
     public /*out*/ readonly accountId!: pulumi.Output<string>;
     /**
-     * The ID of the cluster that you want to manage.
+     * The ID of the cluster that the database belongs to.
      */
     public /*out*/ readonly clusterId!: pulumi.Output<string>;
     /**
@@ -86,7 +87,7 @@ export class Database extends pulumi.CustomResource {
      */
     public readonly maxTables!: pulumi.Output<number>;
     /**
-     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
      */
     public readonly name!: pulumi.Output<string>;
     /**
@@ -138,11 +139,11 @@ export class Database extends pulumi.CustomResource {
  */
 export interface DatabaseState {
     /**
-     * The ID of the account that the cluster belongs to.
+     * The ID of the account that the database belongs to.
      */
     accountId?: pulumi.Input<string>;
     /**
-     * The ID of the cluster that you want to manage.
+     * The ID of the cluster that the database belongs to.
      */
     clusterId?: pulumi.Input<string>;
     /**
@@ -154,7 +155,7 @@ export interface DatabaseState {
      */
     maxTables?: pulumi.Input<number>;
     /**
-     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
      */
     name?: pulumi.Input<string>;
     /**
@@ -180,7 +181,7 @@ export interface DatabaseArgs {
      */
     maxTables?: pulumi.Input<number>;
     /**
-     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+     * The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
      */
     name?: pulumi.Input<string>;
     /**

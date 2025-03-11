@@ -24,8 +24,6 @@ type Provider struct {
 	ClusterId pulumi.StringPtrOutput `pulumi:"clusterId"`
 	// The InfluxDB management token
 	Token pulumi.StringPtrOutput `pulumi:"token"`
-	// The InfluxDB Cloud Dedicated Management API URL
-	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
 // NewProvider registers a new resource with the given unique name, arguments, and options.
@@ -66,8 +64,6 @@ type providerArgs struct {
 	ClusterId *string `pulumi:"clusterId"`
 	// The InfluxDB management token
 	Token *string `pulumi:"token"`
-	// The InfluxDB Cloud Dedicated Management API URL
-	Url *string `pulumi:"url"`
 }
 
 // The set of arguments for constructing a Provider resource.
@@ -78,8 +74,6 @@ type ProviderArgs struct {
 	ClusterId pulumi.StringPtrInput
 	// The InfluxDB management token
 	Token pulumi.StringPtrInput
-	// The InfluxDB Cloud Dedicated Management API URL
-	Url pulumi.StringPtrInput
 }
 
 func (ProviderArgs) ElementType() reflect.Type {
@@ -132,11 +126,6 @@ func (o ProviderOutput) ClusterId() pulumi.StringPtrOutput {
 // The InfluxDB management token
 func (o ProviderOutput) Token() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Token }).(pulumi.StringPtrOutput)
-}
-
-// The InfluxDB Cloud Dedicated Management API URL
-func (o ProviderOutput) Url() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }
 
 func init() {

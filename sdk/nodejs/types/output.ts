@@ -29,11 +29,11 @@ export interface GetDatabasePartitionTemplate {
 
 export interface GetDatabasesDatabase {
     /**
-     * The ID of the account that the cluster belongs to.
+     * The ID of the account that the database belongs to.
      */
     accountId: string;
     /**
-     * The ID of the cluster that you want to manage.
+     * The ID of the cluster that the database belongs to.
      */
     clusterId: string;
     /**

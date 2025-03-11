@@ -10,7 +10,6 @@ import * as utilities from "./utilities";
  * Gets all database tokens for a cluster.
  */
 export function getTokens(opts?: pulumi.InvokeOptions): Promise<GetTokensResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("influxdb3:index/getTokens:getTokens", {
     }, opts);
@@ -29,6 +28,8 @@ export interface GetTokensResult {
 /**
  * Gets all database tokens for a cluster.
  */
-export function getTokensOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetTokensResult> {
-    return pulumi.output(getTokens(opts))
+export function getTokensOutput(opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTokensResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("influxdb3:index/getTokens:getTokens", {
+    }, opts);
 }

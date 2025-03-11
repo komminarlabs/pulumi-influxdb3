@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -138,15 +143,23 @@ def get_token(id: Optional[str] = None,
         description=pulumi.get(__ret__, 'description'),
         id=pulumi.get(__ret__, 'id'),
         permissions=pulumi.get(__ret__, 'permissions'))
-
-
-@_utilities.lift_output_func(get_token)
 def get_token_output(id: Optional[pulumi.Input[str]] = None,
-                     opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTokenResult]:
+                     opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetTokenResult]:
     """
     Gets a database token. Use this data source to retrieve information about a database token, including the token's permissions.
 
 
     :param str id: The ID of the database token.
     """
-    ...
+    __args__ = dict()
+    __args__['id'] = id
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('influxdb3:index/getToken:getToken', __args__, opts=opts, typ=GetTokenResult)
+    return __ret__.apply(lambda __response__: GetTokenResult(
+        access_token=pulumi.get(__response__, 'access_token'),
+        account_id=pulumi.get(__response__, 'account_id'),
+        cluster_id=pulumi.get(__response__, 'cluster_id'),
+        created_at=pulumi.get(__response__, 'created_at'),
+        description=pulumi.get(__response__, 'description'),
+        id=pulumi.get(__response__, 'id'),
+        permissions=pulumi.get(__response__, 'permissions')))

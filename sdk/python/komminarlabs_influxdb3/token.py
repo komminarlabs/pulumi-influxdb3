@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 from ._inputs import *
@@ -161,7 +166,7 @@ class Token(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
-                 permissions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TokenPermissionArgs']]]]] = None,
+                 permissions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['TokenPermissionArgs', 'TokenPermissionArgsDict']]]]] = None,
                  __props__=None):
         """
         Creates and manages a token and returns the generated database token. Use this resource to create/manage a token, which generates an database token with permissions to read or write to a specific database.
@@ -169,7 +174,7 @@ class Token(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] description: The description of the database token.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TokenPermissionArgs']]]] permissions: The list of permissions the database token allows.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['TokenPermissionArgs', 'TokenPermissionArgsDict']]]] permissions: The list of permissions the database token allows.
         """
         ...
     @overload
@@ -196,7 +201,7 @@ class Token(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  description: Optional[pulumi.Input[str]] = None,
-                 permissions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TokenPermissionArgs']]]]] = None,
+                 permissions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['TokenPermissionArgs', 'TokenPermissionArgsDict']]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -233,7 +238,7 @@ class Token(pulumi.CustomResource):
             cluster_id: Optional[pulumi.Input[str]] = None,
             created_at: Optional[pulumi.Input[str]] = None,
             description: Optional[pulumi.Input[str]] = None,
-            permissions: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TokenPermissionArgs']]]]] = None) -> 'Token':
+            permissions: Optional[pulumi.Input[Sequence[pulumi.Input[Union['TokenPermissionArgs', 'TokenPermissionArgsDict']]]]] = None) -> 'Token':
         """
         Get an existing Token resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -246,7 +251,7 @@ class Token(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_id: The ID of the cluster that the database token belongs to.
         :param pulumi.Input[str] created_at: The date and time that the database token was created. Uses RFC3339 format.
         :param pulumi.Input[str] description: The description of the database token.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['TokenPermissionArgs']]]] permissions: The list of permissions the database token allows.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['TokenPermissionArgs', 'TokenPermissionArgsDict']]]] permissions: The list of permissions the database token allows.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 

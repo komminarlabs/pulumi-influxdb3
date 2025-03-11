@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -65,11 +70,13 @@ def get_databases(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetDa
     return AwaitableGetDatabasesResult(
         databases=pulumi.get(__ret__, 'databases'),
         id=pulumi.get(__ret__, 'id'))
-
-
-@_utilities.lift_output_func(get_databases)
-def get_databases_output(opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDatabasesResult]:
+def get_databases_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDatabasesResult]:
     """
     Gets all databases for a cluster.
     """
-    ...
+    __args__ = dict()
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('influxdb3:index/getDatabases:getDatabases', __args__, opts=opts, typ=GetDatabasesResult)
+    return __ret__.apply(lambda __response__: GetDatabasesResult(
+        databases=pulumi.get(__response__, 'databases'),
+        id=pulumi.get(__response__, 'id')))

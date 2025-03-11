@@ -23,6 +23,12 @@ namespace KomminarLabs.InfluxDB3
         /// </summary>
         public static Output<GetTokenResult> Invoke(GetTokenInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTokenResult>("influxdb3:index/getToken:getToken", args ?? new GetTokenInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Gets a database token. Use this data source to retrieve information about a database token, including the token's permissions.
+        /// </summary>
+        public static Output<GetTokenResult> Invoke(GetTokenInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetTokenResult>("influxdb3:index/getToken:getToken", args ?? new GetTokenInvokeArgs(), options.WithDefaults());
     }
 
 

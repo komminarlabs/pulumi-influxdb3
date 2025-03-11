@@ -30,13 +30,9 @@ type GetTokensResult struct {
 }
 
 func GetTokensOutput(ctx *pulumi.Context, opts ...pulumi.InvokeOption) GetTokensResultOutput {
-	return pulumi.ToOutput(0).ApplyT(func(int) (GetTokensResult, error) {
-		r, err := GetTokens(ctx, opts...)
-		var s GetTokensResult
-		if r != nil {
-			s = *r
-		}
-		return s, err
+	return pulumi.ToOutput(0).ApplyT(func(int) (GetTokensResultOutput, error) {
+		options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+		return ctx.InvokeOutput("influxdb3:index/getTokens:getTokens", nil, GetTokensResultOutput{}, options).(GetTokensResultOutput), nil
 	}).(GetTokensResultOutput)
 }
 

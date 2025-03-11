@@ -37,12 +37,6 @@ namespace KomminarLabs.InfluxDB3
         [Output("token")]
         public Output<string?> Token { get; private set; } = null!;
 
-        /// <summary>
-        /// The InfluxDB Cloud Dedicated Management API URL
-        /// </summary>
-        [Output("url")]
-        public Output<string?> Url { get; private set; } = null!;
-
 
         /// <summary>
         /// Create a Provider resource with the given unique name, arguments, and options.
@@ -125,12 +119,6 @@ namespace KomminarLabs.InfluxDB3
                 _token = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
             }
         }
-
-        /// <summary>
-        /// The InfluxDB Cloud Dedicated Management API URL
-        /// </summary>
-        [Input("url")]
-        public Input<string>? Url { get; set; }
 
         public ProviderArgs()
         {
