@@ -15,11 +15,11 @@ namespace KomminarLabs.InfluxDB3.Outputs
     public sealed class GetDatabasesDatabaseResult
     {
         /// <summary>
-        /// The ID of the account that the cluster belongs to.
+        /// The ID of the account that the database belongs to.
         /// </summary>
         public readonly string AccountId;
         /// <summary>
-        /// The ID of the cluster that you want to manage.
+        /// The ID of the cluster that the database belongs to.
         /// </summary>
         public readonly string ClusterId;
         /// <summary>

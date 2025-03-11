@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -65,11 +70,13 @@ def get_tokens(opts: Optional[pulumi.InvokeOptions] = None) -> AwaitableGetToken
     return AwaitableGetTokensResult(
         id=pulumi.get(__ret__, 'id'),
         tokens=pulumi.get(__ret__, 'tokens'))
-
-
-@_utilities.lift_output_func(get_tokens)
-def get_tokens_output(opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetTokensResult]:
+def get_tokens_output(opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetTokensResult]:
     """
     Gets all database tokens for a cluster.
     """
-    ...
+    __args__ = dict()
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('influxdb3:index/getTokens:getTokens', __args__, opts=opts, typ=GetTokensResult)
+    return __ret__.apply(lambda __response__: GetTokensResult(
+        id=pulumi.get(__response__, 'id'),
+        tokens=pulumi.get(__response__, 'tokens')))

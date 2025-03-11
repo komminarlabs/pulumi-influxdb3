@@ -1,6 +1,6 @@
-import * as influxdb from "@komminarlabs/influxdb3";
+import * as influxdb3 from "@komminarlabs/influxdb3";
 
-export const database = new influxdb.Database("signals", {
+export const database = new influxdb3.Database("signals", {
     name: "signals",
     retentionPeriod: 604800,
 });

@@ -25,8 +25,3 @@ func GetClusterId(ctx *pulumi.Context) string {
 func GetToken(ctx *pulumi.Context) string {
 	return config.Get(ctx, "influxdb3:token")
 }
-
-// The InfluxDB Cloud Dedicated Management API URL
-func GetUrl(ctx *pulumi.Context) string {
-	return config.Get(ctx, "influxdb3:url")
-}

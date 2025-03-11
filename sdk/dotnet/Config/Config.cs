@@ -62,15 +62,5 @@ namespace KomminarLabs.InfluxDB3
             set => _token.Set(value);
         }
 
-        private static readonly __Value<string?> _url = new __Value<string?>(() => __config.Get("url"));
-        /// <summary>
-        /// The InfluxDB Cloud Dedicated Management API URL
-        /// </summary>
-        public static string? Url
-        {
-            get => _url.Get();
-            set => _url.Set(value);
-        }
-
     }
 }

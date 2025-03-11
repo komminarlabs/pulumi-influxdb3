@@ -10,7 +10,6 @@ import * as utilities from "./utilities";
  * Retrieves a database. Use this data source to retrieve information for a specific database.
  */
 export function getDatabase(args: GetDatabaseArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("influxdb3:index/getDatabase:getDatabase", {
         "name": args.name,
@@ -32,11 +31,11 @@ export interface GetDatabaseArgs {
  */
 export interface GetDatabaseResult {
     /**
-     * The ID of the account that the cluster belongs to.
+     * The ID of the account that the database belongs to.
      */
     readonly accountId: string;
     /**
-     * The ID of the cluster that you want to manage.
+     * The ID of the cluster that the database belongs to.
      */
     readonly clusterId: string;
     /**
@@ -67,8 +66,11 @@ export interface GetDatabaseResult {
 /**
  * Retrieves a database. Use this data source to retrieve information for a specific database.
  */
-export function getDatabaseOutput(args: GetDatabaseOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDatabaseResult> {
-    return pulumi.output(args).apply((a: any) => getDatabase(a, opts))
+export function getDatabaseOutput(args: GetDatabaseOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatabaseResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("influxdb3:index/getDatabase:getDatabase", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

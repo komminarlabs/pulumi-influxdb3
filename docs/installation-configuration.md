@@ -21,7 +21,6 @@ The following configuration points are available for the `InfluxDB3` provider:
 - `influxdb3:account_id` (environment: `INFLUXDB3_ACCOUNT_ID`) - The ID of the account that the cluster belongs to
 - `influxdb3:cluster_id` (environment: `INFLUXDB3_CLUSTER_ID`) - The ID of the cluster that you want to manage
 - `influxdb3:token` (environment: `INFLUXDB3_TOKEN`) - The InfluxDB management token
-- `influxdb3:url` (environment: `INFLUXDB3_URL`) - The InfluxDB Cloud Dedicated Management API URL
 
 ### Provider Binary
 

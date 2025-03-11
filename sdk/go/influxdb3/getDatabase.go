@@ -30,9 +30,9 @@ type LookupDatabaseArgs struct {
 
 // A collection of values returned by getDatabase.
 type LookupDatabaseResult struct {
-	// The ID of the account that the cluster belongs to.
+	// The ID of the account that the database belongs to.
 	AccountId string `pulumi:"accountId"`
-	// The ID of the cluster that you want to manage.
+	// The ID of the cluster that the database belongs to.
 	ClusterId string `pulumi:"clusterId"`
 	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`
@@ -49,15 +49,11 @@ type LookupDatabaseResult struct {
 }
 
 func LookupDatabaseOutput(ctx *pulumi.Context, args LookupDatabaseOutputArgs, opts ...pulumi.InvokeOption) LookupDatabaseResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupDatabaseResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupDatabaseResultOutput, error) {
 			args := v.(LookupDatabaseArgs)
-			r, err := LookupDatabase(ctx, &args, opts...)
-			var s LookupDatabaseResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("influxdb3:index/getDatabase:getDatabase", args, LookupDatabaseResultOutput{}, options).(LookupDatabaseResultOutput), nil
 		}).(LookupDatabaseResultOutput)
 }
 
@@ -86,12 +82,12 @@ func (o LookupDatabaseResultOutput) ToLookupDatabaseResultOutputWithContext(ctx 
 	return o
 }
 
-// The ID of the account that the cluster belongs to.
+// The ID of the account that the database belongs to.
 func (o LookupDatabaseResultOutput) AccountId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupDatabaseResult) string { return v.AccountId }).(pulumi.StringOutput)
 }
 
-// The ID of the cluster that you want to manage.
+// The ID of the cluster that the database belongs to.
 func (o LookupDatabaseResultOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupDatabaseResult) string { return v.ClusterId }).(pulumi.StringOutput)
 }

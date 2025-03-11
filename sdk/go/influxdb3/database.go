@@ -38,6 +38,7 @@ import (
 //			}
 //			json0 := string(tmpJSON0)
 //			_, err = influxdb3.NewDatabase(ctx, "signals", &influxdb3.DatabaseArgs{
+//				Name:            pulumi.String("signals"),
 //				RetentionPeriod: pulumi.Int(604800),
 //				PartitionTemplates: influxdb3.DatabasePartitionTemplateArray{
 //					&influxdb3.DatabasePartitionTemplateArgs{
@@ -69,15 +70,15 @@ import (
 type Database struct {
 	pulumi.CustomResourceState
 
-	// The ID of the account that the cluster belongs to.
+	// The ID of the account that the database belongs to.
 	AccountId pulumi.StringOutput `pulumi:"accountId"`
-	// The ID of the cluster that you want to manage.
+	// The ID of the cluster that the database belongs to.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// The maximum number of columns per table for the cluster database. The default is `200`
 	MaxColumnsPerTable pulumi.IntOutput `pulumi:"maxColumnsPerTable"`
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables pulumi.IntOutput `pulumi:"maxTables"`
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name pulumi.StringOutput `pulumi:"name"`
 	// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
 	PartitionTemplates DatabasePartitionTemplateArrayOutput `pulumi:"partitionTemplates"`
@@ -115,15 +116,15 @@ func GetDatabase(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Database resources.
 type databaseState struct {
-	// The ID of the account that the cluster belongs to.
+	// The ID of the account that the database belongs to.
 	AccountId *string `pulumi:"accountId"`
-	// The ID of the cluster that you want to manage.
+	// The ID of the cluster that the database belongs to.
 	ClusterId *string `pulumi:"clusterId"`
 	// The maximum number of columns per table for the cluster database. The default is `200`
 	MaxColumnsPerTable *int `pulumi:"maxColumnsPerTable"`
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables *int `pulumi:"maxTables"`
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name *string `pulumi:"name"`
 	// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
 	PartitionTemplates []DatabasePartitionTemplate `pulumi:"partitionTemplates"`
@@ -132,15 +133,15 @@ type databaseState struct {
 }
 
 type DatabaseState struct {
-	// The ID of the account that the cluster belongs to.
+	// The ID of the account that the database belongs to.
 	AccountId pulumi.StringPtrInput
-	// The ID of the cluster that you want to manage.
+	// The ID of the cluster that the database belongs to.
 	ClusterId pulumi.StringPtrInput
 	// The maximum number of columns per table for the cluster database. The default is `200`
 	MaxColumnsPerTable pulumi.IntPtrInput
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables pulumi.IntPtrInput
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name pulumi.StringPtrInput
 	// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
 	PartitionTemplates DatabasePartitionTemplateArrayInput
@@ -157,7 +158,7 @@ type databaseArgs struct {
 	MaxColumnsPerTable *int `pulumi:"maxColumnsPerTable"`
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables *int `pulumi:"maxTables"`
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name *string `pulumi:"name"`
 	// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
 	PartitionTemplates []DatabasePartitionTemplate `pulumi:"partitionTemplates"`
@@ -171,7 +172,7 @@ type DatabaseArgs struct {
 	MaxColumnsPerTable pulumi.IntPtrInput
 	// The maximum number of tables for the cluster database. The default is `500`
 	MaxTables pulumi.IntPtrInput
-	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+	// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 	Name pulumi.StringPtrInput
 	// A template for [partitioning](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/custom-partitions/partition-templates/) a cluster database. **Note:** A partition template can include up to 7 total tag and tag bucket parts and only 1 time part. You can only apply a partition template when creating a database. You [can't update a partition template](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/create/#partition-templates-can-only-be-applied-on-create) on an existing database. An update will result in resource replacement.
 	PartitionTemplates DatabasePartitionTemplateArrayInput
@@ -266,12 +267,12 @@ func (o DatabaseOutput) ToDatabaseOutputWithContext(ctx context.Context) Databas
 	return o
 }
 
-// The ID of the account that the cluster belongs to.
+// The ID of the account that the database belongs to.
 func (o DatabaseOutput) AccountId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Database) pulumi.StringOutput { return v.AccountId }).(pulumi.StringOutput)
 }
 
-// The ID of the cluster that you want to manage.
+// The ID of the cluster that the database belongs to.
 func (o DatabaseOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Database) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
@@ -286,7 +287,7 @@ func (o DatabaseOutput) MaxTables() pulumi.IntOutput {
 	return o.ApplyT(func(v *Database) pulumi.IntOutput { return v.MaxTables }).(pulumi.IntOutput)
 }
 
-// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated.  An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
+// The name of the cluster database. The Length should be between `[ 1 .. 64 ]` characters. **Note:** Database names can't be updated. An update will result in resource replacement. After a database is deleted, you cannot [reuse](https://docs.influxdata.com/influxdb/cloud-dedicated/admin/databases/delete/#cannot-reuse-database-names) the same name for a new database.
 func (o DatabaseOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Database) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }

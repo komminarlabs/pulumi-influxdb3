@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = ['ProviderArgs', 'Provider']
@@ -16,14 +21,12 @@ class ProviderArgs:
     def __init__(__self__, *,
                  account_id: Optional[pulumi.Input[str]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
-                 token: Optional[pulumi.Input[str]] = None,
-                 url: Optional[pulumi.Input[str]] = None):
+                 token: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input[str] account_id: The ID of the account that the cluster belongs to
         :param pulumi.Input[str] cluster_id: The ID of the cluster that you want to manage
         :param pulumi.Input[str] token: The InfluxDB management token
-        :param pulumi.Input[str] url: The InfluxDB Cloud Dedicated Management API URL
         """
         if account_id is not None:
             pulumi.set(__self__, "account_id", account_id)
@@ -31,8 +34,6 @@ class ProviderArgs:
             pulumi.set(__self__, "cluster_id", cluster_id)
         if token is not None:
             pulumi.set(__self__, "token", token)
-        if url is not None:
-            pulumi.set(__self__, "url", url)
 
     @property
     @pulumi.getter(name="accountId")
@@ -70,18 +71,6 @@ class ProviderArgs:
     def token(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "token", value)
 
-    @property
-    @pulumi.getter
-    def url(self) -> Optional[pulumi.Input[str]]:
-        """
-        The InfluxDB Cloud Dedicated Management API URL
-        """
-        return pulumi.get(self, "url")
-
-    @url.setter
-    def url(self, value: Optional[pulumi.Input[str]]):
-        pulumi.set(self, "url", value)
-
 
 class Provider(pulumi.ProviderResource):
     @overload
@@ -91,7 +80,6 @@ class Provider(pulumi.ProviderResource):
                  account_id: Optional[pulumi.Input[str]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  token: Optional[pulumi.Input[str]] = None,
-                 url: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         The provider type for the influxdb3 package. By default, resources use package-wide configuration
@@ -104,7 +92,6 @@ class Provider(pulumi.ProviderResource):
         :param pulumi.Input[str] account_id: The ID of the account that the cluster belongs to
         :param pulumi.Input[str] cluster_id: The ID of the cluster that you want to manage
         :param pulumi.Input[str] token: The InfluxDB management token
-        :param pulumi.Input[str] url: The InfluxDB Cloud Dedicated Management API URL
         """
         ...
     @overload
@@ -136,7 +123,6 @@ class Provider(pulumi.ProviderResource):
                  account_id: Optional[pulumi.Input[str]] = None,
                  cluster_id: Optional[pulumi.Input[str]] = None,
                  token: Optional[pulumi.Input[str]] = None,
-                 url: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -149,7 +135,6 @@ class Provider(pulumi.ProviderResource):
             __props__.__dict__["account_id"] = None if account_id is None else pulumi.Output.secret(account_id)
             __props__.__dict__["cluster_id"] = None if cluster_id is None else pulumi.Output.secret(cluster_id)
             __props__.__dict__["token"] = None if token is None else pulumi.Output.secret(token)
-            __props__.__dict__["url"] = url
         secret_opts = pulumi.ResourceOptions(additional_secret_outputs=["accountId", "clusterId", "token"])
         opts = pulumi.ResourceOptions.merge(opts, secret_opts)
         super(Provider, __self__).__init__(
@@ -181,12 +166,4 @@ class Provider(pulumi.ProviderResource):
         The InfluxDB management token
         """
         return pulumi.get(self, "token")
-
-    @property
-    @pulumi.getter
-    def url(self) -> pulumi.Output[Optional[str]]:
-        """
-        The InfluxDB Cloud Dedicated Management API URL
-        """
-        return pulumi.get(self, "url")
 

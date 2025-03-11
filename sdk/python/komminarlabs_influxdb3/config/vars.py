@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from .. import _utilities
 
 import types
@@ -35,11 +40,4 @@ class _ExportableConfig(types.ModuleType):
         The InfluxDB management token
         """
         return __config__.get('token')
-
-    @property
-    def url(self) -> Optional[str]:
-        """
-        The InfluxDB Cloud Dedicated Management API URL
-        """
-        return __config__.get('url')
 

@@ -23,6 +23,12 @@ namespace KomminarLabs.InfluxDB3
         /// </summary>
         public static Output<GetTokensResult> Invoke(InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTokensResult>("influxdb3:index/getTokens:getTokens", InvokeArgs.Empty, options.WithDefaults());
+
+        /// <summary>
+        /// Gets all database tokens for a cluster.
+        /// </summary>
+        public static Output<GetTokensResult> Invoke(InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetTokensResult>("influxdb3:index/getTokens:getTokens", InvokeArgs.Empty, options.WithDefaults());
     }
 
 

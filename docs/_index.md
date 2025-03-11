@@ -19,10 +19,10 @@ The InfluxDB V3 provider must be configured with credentials to deploy and updat
 
 ```typescript
 import * as pulumi from "@pulumi/pulumi";
-import * as influxdb from "@komminarlabs/influxdb3";
+import * as influxdb3 from "@komminarlabs/influxdb3";
 
 // Create a new Bucket
-export const database = new influxdb.Database("signals", {
+export const database = new influxdb3.Database("signals", {
     name: "signals",
     retentionPeriod: 604800,
 });

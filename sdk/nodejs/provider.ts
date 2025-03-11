@@ -37,10 +37,6 @@ export class Provider extends pulumi.ProviderResource {
      * The InfluxDB management token
      */
     public readonly token!: pulumi.Output<string | undefined>;
-    /**
-     * The InfluxDB Cloud Dedicated Management API URL
-     */
-    public readonly url!: pulumi.Output<string | undefined>;
 
     /**
      * Create a Provider resource with the given unique name, arguments, and options.
@@ -56,7 +52,6 @@ export class Provider extends pulumi.ProviderResource {
             resourceInputs["accountId"] = args?.accountId ? pulumi.secret(args.accountId) : undefined;
             resourceInputs["clusterId"] = args?.clusterId ? pulumi.secret(args.clusterId) : undefined;
             resourceInputs["token"] = args?.token ? pulumi.secret(args.token) : undefined;
-            resourceInputs["url"] = args ? args.url : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         const secretOpts = { additionalSecretOutputs: ["accountId", "clusterId", "token"] };
@@ -81,8 +76,4 @@ export interface ProviderArgs {
      * The InfluxDB management token
      */
     token?: pulumi.Input<string>;
-    /**
-     * The InfluxDB Cloud Dedicated Management API URL
-     */
-    url?: pulumi.Input<string>;
 }

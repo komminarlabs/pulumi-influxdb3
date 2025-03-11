@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -119,8 +124,8 @@ class GetDatabasesDatabaseResult(dict):
                  partition_templates: Sequence['outputs.GetDatabasesDatabasePartitionTemplateResult'],
                  retention_period: int):
         """
-        :param str account_id: The ID of the account that the cluster belongs to.
-        :param str cluster_id: The ID of the cluster that you want to manage.
+        :param str account_id: The ID of the account that the database belongs to.
+        :param str cluster_id: The ID of the cluster that the database belongs to.
         :param int max_columns_per_table: The maximum number of columns per table for the cluster database.
         :param int max_tables: The maximum number of tables for the cluster database.
         :param str name: The name of the cluster database.
@@ -139,7 +144,7 @@ class GetDatabasesDatabaseResult(dict):
     @pulumi.getter(name="accountId")
     def account_id(self) -> str:
         """
-        The ID of the account that the cluster belongs to.
+        The ID of the account that the database belongs to.
         """
         return pulumi.get(self, "account_id")
 
@@ -147,7 +152,7 @@ class GetDatabasesDatabaseResult(dict):
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> str:
         """
-        The ID of the cluster that you want to manage.
+        The ID of the cluster that the database belongs to.
         """
         return pulumi.get(self, "cluster_id")
 

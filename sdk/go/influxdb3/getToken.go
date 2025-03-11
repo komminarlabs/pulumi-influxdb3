@@ -47,15 +47,11 @@ type LookupTokenResult struct {
 }
 
 func LookupTokenOutput(ctx *pulumi.Context, args LookupTokenOutputArgs, opts ...pulumi.InvokeOption) LookupTokenResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupTokenResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupTokenResultOutput, error) {
 			args := v.(LookupTokenArgs)
-			r, err := LookupToken(ctx, &args, opts...)
-			var s LookupTokenResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("influxdb3:index/getToken:getToken", args, LookupTokenResultOutput{}, options).(LookupTokenResultOutput), nil
 		}).(LookupTokenResultOutput)
 }
 

@@ -4,9 +4,14 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 from . import outputs
 
@@ -52,7 +57,7 @@ class GetDatabaseResult:
     @pulumi.getter(name="accountId")
     def account_id(self) -> str:
         """
-        The ID of the account that the cluster belongs to.
+        The ID of the account that the database belongs to.
         """
         return pulumi.get(self, "account_id")
 
@@ -60,7 +65,7 @@ class GetDatabaseResult:
     @pulumi.getter(name="clusterId")
     def cluster_id(self) -> str:
         """
-        The ID of the cluster that you want to manage.
+        The ID of the cluster that the database belongs to.
         """
         return pulumi.get(self, "cluster_id")
 
@@ -151,15 +156,24 @@ def get_database(name: Optional[str] = None,
         name=pulumi.get(__ret__, 'name'),
         partition_templates=pulumi.get(__ret__, 'partition_templates'),
         retention_period=pulumi.get(__ret__, 'retention_period'))
-
-
-@_utilities.lift_output_func(get_database)
 def get_database_output(name: Optional[pulumi.Input[str]] = None,
-                        opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetDatabaseResult]:
+                        opts: Optional[Union[pulumi.InvokeOptions, pulumi.InvokeOutputOptions]] = None) -> pulumi.Output[GetDatabaseResult]:
     """
     Retrieves a database. Use this data source to retrieve information for a specific database.
 
 
     :param str name: The name of the cluster database.
     """
-    ...
+    __args__ = dict()
+    __args__['name'] = name
+    opts = pulumi.InvokeOutputOptions.merge(_utilities.get_invoke_opts_defaults(), opts)
+    __ret__ = pulumi.runtime.invoke_output('influxdb3:index/getDatabase:getDatabase', __args__, opts=opts, typ=GetDatabaseResult)
+    return __ret__.apply(lambda __response__: GetDatabaseResult(
+        account_id=pulumi.get(__response__, 'account_id'),
+        cluster_id=pulumi.get(__response__, 'cluster_id'),
+        id=pulumi.get(__response__, 'id'),
+        max_columns_per_table=pulumi.get(__response__, 'max_columns_per_table'),
+        max_tables=pulumi.get(__response__, 'max_tables'),
+        name=pulumi.get(__response__, 'name'),
+        partition_templates=pulumi.get(__response__, 'partition_templates'),
+        retention_period=pulumi.get(__response__, 'retention_period')))

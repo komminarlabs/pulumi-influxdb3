@@ -23,6 +23,12 @@ namespace KomminarLabs.InfluxDB3
         /// </summary>
         public static Output<GetDatabaseResult> Invoke(GetDatabaseInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseResult>("influxdb3:index/getDatabase:getDatabase", args ?? new GetDatabaseInvokeArgs(), options.WithDefaults());
+
+        /// <summary>
+        /// Retrieves a database. Use this data source to retrieve information for a specific database.
+        /// </summary>
+        public static Output<GetDatabaseResult> Invoke(GetDatabaseInvokeArgs args, InvokeOutputOptions options)
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseResult>("influxdb3:index/getDatabase:getDatabase", args ?? new GetDatabaseInvokeArgs(), options.WithDefaults());
     }
 
 
@@ -59,11 +65,11 @@ namespace KomminarLabs.InfluxDB3
     public sealed class GetDatabaseResult
     {
         /// <summary>
-        /// The ID of the account that the cluster belongs to.
+        /// The ID of the account that the database belongs to.
         /// </summary>
         public readonly string AccountId;
         /// <summary>
-        /// The ID of the cluster that you want to manage.
+        /// The ID of the cluster that the database belongs to.
         /// </summary>
         public readonly string ClusterId;
         /// <summary>

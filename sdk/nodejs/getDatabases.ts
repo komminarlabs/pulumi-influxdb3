@@ -10,7 +10,6 @@ import * as utilities from "./utilities";
  * Gets all databases for a cluster.
  */
 export function getDatabases(opts?: pulumi.InvokeOptions): Promise<GetDatabasesResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("influxdb3:index/getDatabases:getDatabases", {
     }, opts);
@@ -29,6 +28,8 @@ export interface GetDatabasesResult {
 /**
  * Gets all databases for a cluster.
  */
-export function getDatabasesOutput(opts?: pulumi.InvokeOptions): pulumi.Output<GetDatabasesResult> {
-    return pulumi.output(getDatabases(opts))
+export function getDatabasesOutput(opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatabasesResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("influxdb3:index/getDatabases:getDatabases", {
+    }, opts);
 }

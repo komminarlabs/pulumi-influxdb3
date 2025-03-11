@@ -40,14 +40,3 @@ Object.defineProperty(exports, "token", {
     enumerable: true,
 });
 
-/**
- * The InfluxDB Cloud Dedicated Management API URL
- */
-export declare const url: string | undefined;
-Object.defineProperty(exports, "url", {
-    get() {
-        return __config.get("url");
-    },
-    enumerable: true,
-});
-

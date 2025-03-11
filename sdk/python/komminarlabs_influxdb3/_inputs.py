@@ -4,15 +4,37 @@
 
 import copy
 import warnings
+import sys
 import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
+if sys.version_info >= (3, 11):
+    from typing import NotRequired, TypedDict, TypeAlias
+else:
+    from typing_extensions import NotRequired, TypedDict, TypeAlias
 from . import _utilities
 
 __all__ = [
     'DatabasePartitionTemplateArgs',
+    'DatabasePartitionTemplateArgsDict',
     'TokenPermissionArgs',
+    'TokenPermissionArgsDict',
 ]
+
+MYPY = False
+
+if not MYPY:
+    class DatabasePartitionTemplateArgsDict(TypedDict):
+        type: pulumi.Input[str]
+        """
+        The type of template part. Valid values are `bucket`, `tag` or `time`.
+        """
+        value: pulumi.Input[str]
+        """
+        The value of template part. **Note:** For `bucket` partition template type use `jsonencode()` function to encode the value to a string.
+        """
+elif False:
+    DatabasePartitionTemplateArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class DatabasePartitionTemplateArgs:
@@ -50,6 +72,19 @@ class DatabasePartitionTemplateArgs:
     def value(self, value: pulumi.Input[str]):
         pulumi.set(self, "value", value)
 
+
+if not MYPY:
+    class TokenPermissionArgsDict(TypedDict):
+        action: pulumi.Input[str]
+        """
+        The action the database token permission allows. Valid values are `read` or `write`.
+        """
+        resource: pulumi.Input[str]
+        """
+        The resource the database token permission applies to. `*` refers to all databases.
+        """
+elif False:
+    TokenPermissionArgsDict: TypeAlias = Mapping[str, Any]
 
 @pulumi.input_type
 class TokenPermissionArgs:
